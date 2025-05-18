@@ -1,3 +1,9 @@
+
+@import 'tailwindcss';
+@plugin "daisyui";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: InterRegular; 
   src: url("./assets/fonts/Inter_18pt-Regular.ttf");
@@ -16,9 +22,7 @@
 }
 
 
-@import 'tailwindcss';
-@plugin "daisyui";
-@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-Inter-Regular: Inter;
   --font-InterMedium: InterMedium;
