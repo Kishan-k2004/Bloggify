@@ -1,43 +1,80 @@
 import React from 'react';
-import { Profile } from '../components/index.js';
+import { Profile, ThemeSwitcher } from '../components/index.js';
 
 function Navbar() {
+  const authStatus = true
 
+  const navItem = [
+    {
+      name : "Stories",
+      status : true,
+      slug : '/Blogs'
+    },
+    {
+      name : "About Me",
+      status : !authStatus,
+      slug : '/about'
+    },
+    {
+      name : "Get Started",
+      status : !authStatus,
+      slug : '/sign-up'
+    },
+    {
+      name : "Add Story",
+      status : authStatus,
+      slug : '/create-blog'
+    },
+    {
+      name : "My Space",
+      status : authStatus,
+      slug : '/my-blogs'
+    }
+  ]
     
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-white dark:bg-base-100 shadow-sm">
       
       {/* Left: Hamburger + Logo */}
       <div className="flex-1 flex items-center">
         {/* Hamburger - visible on small screens only */}
         <div className="dropdown md:hidden">
-          <button tabIndex={0} className="btn btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <button tabIndex={0} className="p-2 cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-current text-base-100 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a>Link</a></li>
-            <li><a>Link2</a></li>
+          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white dark:bg-base-100 text-base-100 dark:text-white rounded-box w-52">
+            {navItem.map((item)=>(
+              item.status && <li><a>{item.name}</a></li>
+            ))}
           </ul>
         </div>
 
         {/* Logo */}
-        <a className="btn btn-ghost text-xl ml-2">Bloggify</a>
+        <a className="p-2 text-xl ml-2 text-base-100 dark:text-white font-InterSemibold">Bloggify</a>
       </div>
 
       {/* Center: Horizontal Menu on md+ */}
-      <div className="hidden md:flex">
-        <ul className="menu menu-horizontal px-3">
-          <li><a>Link</a></li>
-          <li><a>Link2</a></li>
+      <div className="hidden md:flex text-base-100 dark:text-white">
+        <ul className="flex gap-6 px-3">
+          {
+            navItem.map((item)=>(
+              item.status && <li> <a href="#" className="text-base-100 dark:text-white hover:underline underline-offset-4 transition duration-200">{item.name}</a> </li>
+            ))
+          }
         </ul>
+
       </div>
 
       {/* Right: Profile always visible */}
-      <div className="flex-none">
-        <Profile />
+      <div className="flex-none flex items-center">
+         <div className='mt-0.2 ml-4'><ThemeSwitcher /></div>
+        <div className="ml-5">
+          {authStatus && <Profile />}
+        </div>
       </div>
+
     </div>
   );
 }

@@ -1,6 +1,5 @@
-import React from 'react'
-import react from '../assets/react.svg'
-import {Dropdown} from './index.js'
+
+import Dropdown from './Dropdown'
 function Profile(props) {
     
     const url = null

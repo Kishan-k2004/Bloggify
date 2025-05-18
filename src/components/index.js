@@ -1,5 +1,5 @@
-import Profile from "./profile";
-import Dropdown from "./Dropdown";
+import Profile from "./navbar/Profile";
+import ThemeSwitcher from "./navbar/ThemeSwitcher";
 
 
-export {Profile,Dropdown}
+export {Profile,ThemeSwitcher}
