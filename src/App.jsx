@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import { Navbar } from './pages/index.js'
+import { Navbar,Footer } from './pages/index.js'
 import { ThemeProvider } from './context/theme.js'
 
 function App() {
@@ -31,9 +31,14 @@ function App() {
 
   return (
     <ThemeProvider value={{darkMode,toggleDarkMode}}>
-      <div className="min-h-screen w-full">
+      <div className="min-h-screen w-full flex flex-col">
         <Navbar />
-      </div>
+        <main className="flex-grow">
+          {/* Other content here */}
+        </main>
+        <footer><Footer/></footer>
+</div>
+
     </ThemeProvider>
 
     
