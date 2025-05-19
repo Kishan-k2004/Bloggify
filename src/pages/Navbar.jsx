@@ -2,7 +2,7 @@ import React from 'react';
 import { Profile, ThemeSwitcher } from '../components/index.js';
 
 function Navbar() {
-  const authStatus = true
+  const authStatus = false
 
   const navItem = [
     {
@@ -18,7 +18,8 @@ function Navbar() {
     {
       name : "Get Started",
       status : !authStatus,
-      slug : '/sign-up'
+      slug : '/sign-up',
+      event : ()=> document.getElementById('modal').checked = true
     },
     {
       name : "Add Story",
@@ -33,6 +34,7 @@ function Navbar() {
   ]
     
   return (
+    <>
     <div className="navbar bg-white dark:bg-base-100 shadow-sm">
       
       {/* Left: Hamburger + Logo */}
@@ -46,7 +48,7 @@ function Navbar() {
           </button>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white dark:bg-base-100 text-base-100 dark:text-white rounded-box w-52">
             {navItem.map((item)=>(
-              item.status && <li><a>{item.name}</a></li>
+              item.status && <li key={item.name}><a onClick={item.event && item.event}>{item.name}</a></li>
             ))}
           </ul>
         </div>
@@ -60,7 +62,7 @@ function Navbar() {
         <ul className="flex gap-6 px-3">
           {
             navItem.map((item)=>(
-              item.status && <li> <a href="#" className="text-base-100 dark:text-white hover:underline underline-offset-4 transition duration-200">{item.name}</a> </li>
+              item.status && <li key={item.name}> <a href="#" onClick={item.event &&  item.event} className="text-base-100 dark:text-white hover:underline underline-offset-4 transition duration-200">{item.name}</a> </li>
             ))
           }
         </ul>
@@ -74,8 +76,20 @@ function Navbar() {
           {authStatus && <Profile />}
         </div>
       </div>
-
     </div>
+    
+    <input type="checkbox" id="modal" className="modal-toggle" />
+    <div className="modal" role="dialog">
+      <div className="modal-box bg-white dark:bg-base-100">
+        <h3 className="text-lg font-bold text-black dark:text-white">Hello!</h3>
+        <p className="py-4 text-black dark:text-white">This modal works with a hidden checkbox!</p>
+      </div>
+      <label className="modal-backdrop " htmlFor="modal" >Close</label>
+    </div>
+
+
+  </>
+    
   );
 }
 

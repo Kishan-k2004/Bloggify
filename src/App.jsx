@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './App.css'
+
 import { Navbar,Footer } from './pages/index.js'
 import { ThemeProvider } from './context/theme.js'
 
