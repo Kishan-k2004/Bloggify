@@ -20,14 +20,24 @@
   font-family: InterBold; 
   src: url("./assets/fonts/Inter_18pt-Bold.ttf");
 }
+@font-face {
+  font-family: InterThin;
+  src: url("./assets/fonts/Inter_18pt-Thin.ttf");
+}
+@font-face {
+  font-family: InterLight;
+  src: url("./assets/fonts/Inter_18pt-Light.ttf");
+}
 
 
 
 @theme {
-  --font-Inter-Regular: Inter;
+  --font-Inter-Regular: InterRegular;
   --font-InterMedium: InterMedium;
   --font-InterSemibold: InterSemibold;
   --font-InterBold: InterBold;
+  --font-InterThin: InterThin;
+  --font-InterLight: InterLight;
 }
 
 @layer base{

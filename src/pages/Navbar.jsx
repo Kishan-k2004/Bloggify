@@ -1,5 +1,5 @@
 import React from 'react';
-import { Profile, ThemeSwitcher } from '../components/index.js';
+import { Model, Profile, ThemeSwitcher } from '../components/index.js';
 
 function Navbar() {
   const authStatus = false
@@ -79,13 +79,7 @@ function Navbar() {
     </div>
     
     <input type="checkbox" id="modal" className="modal-toggle" />
-    <div className="modal" role="dialog">
-      <div className="modal-box bg-white dark:bg-base-100">
-        <h3 className="text-lg font-bold text-black dark:text-white">Hello!</h3>
-        <p className="py-4 text-black dark:text-white">This modal works with a hidden checkbox!</p>
-      </div>
-      <label className="modal-backdrop " htmlFor="modal" >Close</label>
-    </div>
+    <Model/>
 
 
   </>
