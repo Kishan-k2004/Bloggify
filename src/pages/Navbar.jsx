@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Model, Profile, ThemeSwitcher } from '../components/index.js';
 
 function Navbar() {
+  const [view , setview] = useState("default") // default || signup || login
   const authStatus = false
 
   const navItem = [
@@ -18,8 +19,11 @@ function Navbar() {
     {
       name : "Get Started",
       status : !authStatus,
-      slug : '/sign-up',
-      event : ()=> document.getElementById('modal').checked = true
+      slug : '/get-started',
+      event : ()=> {
+        document.getElementById('modal').checked = true
+        setview("default")
+      }
     },
     {
       name : "Add Story",
@@ -79,7 +83,7 @@ function Navbar() {
     </div>
     
     <input type="checkbox" id="modal" className="modal-toggle" />
-    <Model/>
+    <Model view={view} setview={setview}/>
 
 
   </>

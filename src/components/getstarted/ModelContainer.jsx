@@ -2,20 +2,23 @@ import React from 'react'
 import Logo from './Logo'
 import Button from './Button'
 
-function ModelContainer() {
+function ModelContainer({setview}) {
+    
 
     const buttons = [
         {
             name: "Continue with email",
             lightThemeColor: "bg-base-100 text-white",
             darkThemeColor: "dark:bg-white dark:text-black",
-            svg: false
+            svg: false,
+            event: ()=> setview("signup")
         },
         {
             name: "Continue with Google",
             lightThemeColor: "bg-white text-black",
             darkThemeColor: "dark:bg-base-100 dark:text-white",
-            svg: true
+            svg: true,
+            event: ()=>{}
         }
     ]
 
@@ -23,7 +26,8 @@ function ModelContainer() {
         name: "Login",
         lightThemeColor: "bg-white text-black",
         darkThemeColor: "dark:bg-base-100 dark:text-white",
-        svg: false
+        svg: false,
+        event: ()=> setview("login")
     }
   return (
     <>
@@ -40,7 +44,8 @@ function ModelContainer() {
             name={btn.name} 
             lightThemeColor={btn.lightThemeColor} 
             darkThemeColor={btn.darkThemeColor} 
-            svg={btn.svg}/>
+            svg={btn.svg}
+            event={btn.event}/>
         ))}
         <div className="divider text-black dark:text-white before:bg-gray-300 dark:before:bg-gray-600 after:bg-gray-300 dark:after:bg-gray-600 ">or</div>
         
@@ -50,6 +55,7 @@ function ModelContainer() {
             lightThemeColor={Login.lightThemeColor} 
             darkThemeColor={Login.darkThemeColor} 
             svg={Login.svg}
+            event={Login.event}
         />}
         </div>
     </>
