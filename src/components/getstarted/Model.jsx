@@ -4,7 +4,7 @@ import SignUpContainer from './signUp/SignUpContainer'
 import LoginContainer from './login/LoginContainer'
 
 function Model({view,setview}) {
-  console.log("re-render")
+  
 
   return (
     <div className="modal" role="dialog">

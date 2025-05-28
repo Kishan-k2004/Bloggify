@@ -1,8 +1,11 @@
 import React from 'react'
+import Input from './Input'
 
 function YourInfoContainer() {
   return (
-    <div>YourInfoContainer</div>
+    <div>
+      <Input/>
+    </div>
   )
 }
 
