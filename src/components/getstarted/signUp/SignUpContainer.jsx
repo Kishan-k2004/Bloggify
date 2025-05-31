@@ -89,8 +89,9 @@ function SignUpContainer() {
 
         {/* Step Content */}
         <div className="grow min-h-90 text-center text-lg font-medium text-base-100 dark:text-white">
-          <button onClick={GotoNextPage}>Next</button>
+
           <StepsContainer index={index} />
+          
         </div>
 
         {/* Right Arrow */}

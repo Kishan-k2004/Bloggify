@@ -3,7 +3,7 @@ import './Steps.css'
 
 function Steps({steps,setSteps}) {
     const cssName = "step-primary"
-    console.log("step container")
+    
   return (
     <ul className="steps gap-x-8 custom-steps light dark:dark font-Inter-Regular">
         <li className="step step-primary text-black dark:text-white font-Inter-Regular">Intro</li>
