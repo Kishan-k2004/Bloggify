@@ -1,6 +1,6 @@
 import React from 'react'
-import Logo from './modelComponents/Logo'
-import Button from './modelComponents/Button'
+import Logo from './Logo'
+import Button from './Button'
 
 function ModelContainer({setview}) {
     

@@ -1,5 +1,5 @@
 import React from 'react'
-import './Steps.css'
+import '../Model.css'
 
 function Steps({steps,setSteps}) {
     const cssName = "step-primary"

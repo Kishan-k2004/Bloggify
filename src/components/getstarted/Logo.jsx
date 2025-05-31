@@ -1,5 +1,5 @@
 import React from 'react'
-import Bloggify from '../../../assets/Logo.png'
+import Bloggify from '../../assets/Logo.png'
 
 function Logo() {
   return (

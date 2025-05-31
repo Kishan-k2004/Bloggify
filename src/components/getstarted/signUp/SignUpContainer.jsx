@@ -62,7 +62,7 @@ function SignUpContainer() {
 
   return (
     <>
-      <div className="flex justify-center mb-10">
+      <div className="flex justify-center mb-6">
         <Steps steps={steps} setSteps={setSteps} />
       </div>
 
@@ -70,7 +70,7 @@ function SignUpContainer() {
         {/* Left Arrow */}
         <div className="flex items-center h-full">
           <svg
-            className={`w-6 h-6 ${steps[1]?"cursor-pointer text-base-100 dark:text-white":"text-white dark:text-base-100"}`}
+            className={`w-6 h-6 ${steps[1]?"cursor-pointer text-base-100 dark:text-white":"text-gray-200 dark:text-base-100 pointer-events-none"}`}
             onClick={GotoPreviousPage}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
@@ -95,9 +95,9 @@ function SignUpContainer() {
         </div>
 
         {/* Right Arrow */}
-        <div className="flex items-center h-full">
+        <div className='flex items-center h-full pointer-events-none'>
           <svg
-            className={`w-6 h-6 ${steps[3]?"cursor-pointer text-base-100 dark:text-white":"text-white dark:text-base-100"}`}
+            className={`w-6 h-6 ${steps[3]?"cursor-pointer text-base-100 dark:text-white":"text-gray-200 dark:text-base-100 pointer-events-none"}`}
             onClick={GotoNextPage}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
