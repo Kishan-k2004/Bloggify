@@ -16,7 +16,7 @@ function YourInfoContainer({GotoNextPage}) {
       <Gender/>
 
       <Button 
-      name={'Verify'}
+      name={'Send OTP'}
       lightThemeColor={'bg-base-100 text-white'} 
       darkThemeColor={'dark:bg-white dark:text-black'} 
       CssClass={'p-3 w-32'}

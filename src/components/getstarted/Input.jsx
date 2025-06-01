@@ -53,4 +53,18 @@ function Gender(){
   )
 }
 
-export {Input,DateofBirth,Gender}
+function OtpInput() {
+  return(
+    <input
+          type="text"
+          maxLength="6"
+          // value={otp}
+          // onChange={handleChange}
+          className="font-Inter-Regular border-1 p-3 rounded-sm text-center text-2xl w-full bg-gray-200 dark:bg-base-100 focus:outline-none border-black dark:border-white text-black dark:text-white"
+          placeholder="XXXXXX"
+    />
+  )
+}
+
+
+export {Input,DateofBirth,Gender,OtpInput}
