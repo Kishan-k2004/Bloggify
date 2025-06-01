@@ -1,61 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Steps from './Steps';
 import StepsContainer from './StepsContainer';
 
 function SignUpContainer() {
   
   const [index,setIndex] = useState(0)
-  const [steps, setSteps] = useState([true, false, false,false]); // [Info, Verify, Secure,Special case]
+  const [temp, setTemp] = useState(false); // [Info, Verify, Secure,Special case]
+  
 
   function GotoNextPage(){
+    
     if(index === 2){
       return
 
     }else{
-      const newIndex = index+1
-      if(index === 1){
-        setIndex(newIndex)
-        setSteps((prev)=>{
-        const updated = [...prev]
-        updated[newIndex] = true
-        updated[3] = false
-        return updated}
-      )
-      }else{
-
-        setIndex(newIndex)
-        setSteps((prev)=>{
-          const updated = [...prev]
-          updated[newIndex] = true
-          return updated}
-        )
+      if(index+1 == 1){
+        setTemp(true)
       }
-      
-      
+      setIndex((prev)=> prev+1)
+
     }
   }
 
   function GotoPreviousPage(){
-    if(index === 0 ){
-      return
-    }
-    else{
-      if(index === 2){
-        setSteps((prev)=>{
-        const updated = [...prev]
-        updated[3] = true
-        updated[index] = false
-        return updated
-        })
-      }else{
-        setSteps((prev)=>{
-        const updated = [...prev]
-        updated[index] = false
-        return updated
-        })
-      }
-      
+    if(index === 1 ){
       setIndex((prev)=>prev-1)
+    }
+    else{      
+      return
     }
   }
 
@@ -63,14 +35,14 @@ function SignUpContainer() {
   return (
     <>
       <div className="flex justify-center mb-6">
-        <Steps steps={steps} setSteps={setSteps} />
+        <Steps index={index} />
       </div>
 
       <div className="flex gap-5 items-center h-full">
         {/* Left Arrow */}
         <div className="flex items-center h-full">
           <svg
-            className={`w-6 h-6 ${steps[1]?"cursor-pointer text-base-100 dark:text-white":"text-gray-200 dark:text-base-100 pointer-events-none"}`}
+            className={`w-6 h-6 ${index === 1 ?"cursor-pointer text-base-100 dark:text-white":"text-gray-200 dark:text-base-100 pointer-events-none"}`}
             onClick={GotoPreviousPage}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
@@ -90,14 +62,14 @@ function SignUpContainer() {
         {/* Step Content */}
         <div className="grow min-h-90 text-center text-lg font-medium text-base-100 dark:text-white">
 
-          <StepsContainer index={index} />
+          <StepsContainer index={index} GotoNextPage={GotoNextPage} />
           
         </div>
 
         {/* Right Arrow */}
-        <div className='flex items-center h-full pointer-events-none'>
+        <div className='flex items-center h-full'>
           <svg
-            className={`w-6 h-6 ${steps[3]?"cursor-pointer text-base-100 dark:text-white":"text-gray-200 dark:text-base-100 pointer-events-none"}`}
+            className={`w-6 h-6 ${(index === 0 && temp )?"cursor-pointer text-base-100 dark:text-white":"text-gray-200 dark:text-base-100 pointer-events-none"}`}
             onClick={GotoNextPage}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"

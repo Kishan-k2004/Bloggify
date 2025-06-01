@@ -11,7 +11,7 @@ function Input({ name, placeholder, type, ...props }) {
       <input 
       type={type} 
       placeholder={placeholder} 
-      autoFocus
+      required
       className="input input-md font-Inter-Regular w-full bg-gray-200 dark:bg-base-100 focus:outline-none border-black dark:border-white text-black dark:text-white" 
       />
 
@@ -31,7 +31,7 @@ function DateofBirth(){
 
     <label className="input w-full bg-gray-200 dark:bg-base-100 no-focus border-black dark:border-white">
       <span className="label font-Inter-Regular border-r-black">Date of Birth</span>
-      <input type="date" className='font-Inter-Regular bg-gray-200 dark:bg-base-100 text-black dark:text-white' />
+      <input type="date" required className='font-Inter-Regular bg-gray-200 dark:bg-base-100 text-black dark:text-white' />
     </label>
 
     </div>
@@ -43,7 +43,7 @@ function Gender(){
     <div className='mb-6 flex justify-center'>
       <label className="select w-full bg-gray-200 dark:bg-base-100 no-focus border-black dark:border-white">
         <span className="label font-Inter-Regular bg-gray-200 dark:bg-base-100">Gender</span>
-        <select>
+        <select required>
           <option className='font-Inter-Regular'>Male</option>
           <option className='font-Inter-Regular'>Female</option>
           <option className='font-Inter-Regular'>Other</option>

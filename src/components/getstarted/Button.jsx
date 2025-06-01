@@ -4,7 +4,9 @@ import React from 'react'
 function Button({name,lightThemeColor,darkThemeColor,svg,event,CssClass}) {
 
   return (
-    <button className={`btn ${lightThemeColor} ${darkThemeColor} border-[#e5e5e5] ${CssClass || 'w-full mb-5 p-6'}`} onClick={event}>
+    <button 
+    className={`btn ${lightThemeColor} ${darkThemeColor} border-[#e5e5e5] ${CssClass || 'w-full mb-5 p-6'}`} 
+    onClick={event}>
     {svg && <GoogleSvg/>}
     {name}
     </button>
