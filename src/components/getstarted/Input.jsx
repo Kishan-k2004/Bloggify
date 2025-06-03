@@ -1,4 +1,7 @@
 import './Model.css'
+import IconShow from '../../assets/IconShow.png'
+import IconHide from '../../assets/IconHide.png'
+import { useRef } from 'react';
 
 
 function Input({ name, placeholder, type, ...props }) {
@@ -7,6 +10,7 @@ function Input({ name, placeholder, type, ...props }) {
     <label className="floating-label dark:dark-label w-full border-black dark:border-white">
 
       <span className="text-black dark:text-white bg-gray-200 dark:bg-base-100">{name}</span>
+      
 
       <input 
       type={type} 
@@ -14,6 +18,7 @@ function Input({ name, placeholder, type, ...props }) {
       required
       className="input input-md font-Inter-Regular w-full bg-gray-200 dark:bg-base-100 focus:outline-none border-black dark:border-white text-black dark:text-white" 
       />
+      
 
     </label>
     </div>
@@ -66,5 +71,53 @@ function OtpInput() {
   )
 }
 
+function Password({ name, placeholder, type, ...props }) {
 
-export {Input,DateofBirth,Gender,OtpInput}
+  let Inputref = useRef()
+  let Imageref = useRef()
+
+  function PasswordToggle(){
+
+    if(Inputref.current.type === 'password'){
+
+      Inputref.current.type = 'text'
+      Imageref.current.src = IconShow
+
+    }else{
+
+      Inputref.current.type = 'password'
+      Imageref.current.src = IconHide
+
+    }
+  }
+  return (
+    <div className='flex justify-center'>
+    <label className="floating-label dark:dark-label w-full border-black dark:border-white">
+
+      <span className="text-black dark:text-white bg-gray-200 dark:bg-base-100">{name}</span>
+      
+      <div className='flex gap-2 justify-center items-center'>
+
+      <input 
+      type={type} 
+      placeholder={placeholder} 
+      ref={Inputref}
+      required
+      className="input input-md font-Inter-Regular w-full border-black dark:border-white bg-gray-200 dark:bg-base-100 focus:outline-none text-black dark:text-white" 
+      />
+      
+      <img className='w-7 h-7 cursor-pointer hover:opacity-50 brightness-0 dark:brightness-100'
+      onClick={PasswordToggle}
+       src={IconHide} 
+       ref={Imageref}
+       alt="Show Key" />
+      </div>
+      
+
+    </label>
+    </div>
+  );
+}
+
+
+export {Input,DateofBirth,Gender,OtpInput,Password}
