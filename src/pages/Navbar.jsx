@@ -1,9 +1,16 @@
-import React,{useState} from 'react';
+import React,{createContext, useContext, useRef, useState} from 'react';
 import { Model, Profile, ThemeSwitcher } from '../components/index.js';
+
+const ModelContext = createContext()
 
 function Navbar() {
   const [view , setview] = useState("default") // default || signup || login
+  const Modelref = useRef()
   const authStatus = false
+
+  function CloseModle(){
+    Modelref.current.checked = false;
+  }
 
   const navItem = [
     {
@@ -21,7 +28,7 @@ function Navbar() {
       status : !authStatus,
       slug : '/get-started',
       event : ()=> {
-        document.getElementById('modal').checked = true
+        Modelref.current.checked = true
         setview("default")
       }
     },
@@ -38,7 +45,7 @@ function Navbar() {
   ]
     
   return (
-    <>
+    <ModelContext.Provider value={CloseModle}>
     <div className="navbar bg-white dark:bg-base-100 shadow-sm">
       
       {/* Left: Hamburger + Logo */}
@@ -82,13 +89,14 @@ function Navbar() {
       </div>
     </div>
     
-    <input type="checkbox" id="modal" className="modal-toggle" />
+    <input type="checkbox" id="modal" className="modal-toggle" ref={Modelref} />
     <Model view={view} setview={setview}/>
 
 
-  </>
+  </ModelContext.Provider>
     
   );
 }
 
 export default Navbar;
+export {ModelContext}

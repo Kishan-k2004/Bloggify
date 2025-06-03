@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Logo from './Logo'
 import Button from './Button'
-
+import {ModelContext} from '../../pages/Navbar'
 function ModelContainer({setview}) {
+    const CloseModel = useContext(ModelContext)
     
 
     const buttons = [
@@ -18,7 +19,7 @@ function ModelContainer({setview}) {
             lightThemeColor: "bg-white text-black",
             darkThemeColor: "dark:bg-base-100 dark:text-white",
             svg: true,
-            event: ()=>{}
+            event: ()=>{CloseModel()}
         }
     ]
 

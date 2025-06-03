@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Input,Password} from '../Input'
 import Button from '../Button'
 import Logo from '../Logo'
+import { ModelContext } from '../../../pages/Navbar'
 
 function LoginContainer({setview}) {
+  const CloseModel = useContext(ModelContext)
   return (
     <div className='pr-10 pl-10'>
       <Logo/>
@@ -27,7 +29,7 @@ function LoginContainer({setview}) {
       lightThemeColor={'bg-base-100 text-white'} 
       darkThemeColor={'dark:bg-white dark:text-black'} 
       CssClass={'p-3 w-full mt-6'}
-      event={undefined}
+      event={CloseModel}
       />
 
       <Button 

@@ -1,8 +1,14 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext } from 'react'
 import { Password } from '../Input'
 import Button from '../Button'
+import {ModelContext} from '../../../pages/Navbar'
 
 function SetPasswordContainer() {
+  const CloseModel = useContext(ModelContext)
+
+  function CreateAccount(){
+    CloseModel()
+  }
   
   return (
     <>
@@ -27,7 +33,7 @@ function SetPasswordContainer() {
       lightThemeColor={'bg-base-100 text-white'} 
       darkThemeColor={'dark:bg-white dark:text-black'} 
       CssClass={'p-3 w-32 mt-10'}
-      event={undefined}
+      event={CreateAccount}
     />
     </>
   )
