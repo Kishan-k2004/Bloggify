@@ -1,11 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 import Steps from './Steps';
 import StepsContainer from './StepsContainer';
+import { useForm, FormProvider } from 'react-hook-form';
+import Button from '../Button'
+import {ModelContext} from '../../../pages/Navbar'
+
+const NextButtonContext = createContext()
 
 function SignUpContainer() {
   
   const [index,setIndex] = useState(0)
   const [temp, setTemp] = useState(false); // [Info, Verify, Secure,Special case]
+
+  const methods = useForm()
+  const {handleSubmit} = methods
+
+  const CloseModel = useContext(ModelContext)
   
 
   function GotoNextPage(){
@@ -31,9 +41,30 @@ function SignUpContainer() {
     }
   }
 
+  function onSubmit(data){
+    if(index === 0){
+      SubmitInfo(data)
+
+    }else{
+      CreateAccount(data)
+
+    }
+  }
+
+  function SubmitInfo(data){
+    console.log(data)
+    GotoNextPage()
+  }
+
+  function CreateAccount(data){
+    console.log(data)
+    CloseModel()
+  }
+
 
   return (
     <>
+    {/* Steps bar */}
       <div className="flex justify-center mb-6">
         <Steps index={index} />
       </div>
@@ -62,8 +93,34 @@ function SignUpContainer() {
         {/* Step Content */}
         <div className="grow min-h-90 text-center text-lg font-medium text-base-100 dark:text-white">
 
-          <StepsContainer index={index} GotoNextPage={GotoNextPage} />
-          
+          <NextButtonContext.Provider value={GotoNextPage}>
+
+            <FormProvider {...methods}>
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+
+            <StepsContainer index={index} />
+
+            {index === 2 && <Button 
+              name={'Create Account'}
+              lightThemeColor={'bg-base-100 text-white'} 
+              darkThemeColor={'dark:bg-white dark:text-black'} 
+              CssClass={'p-3 w-32 mt-10'}
+              type={'submit'}
+            />}
+            {index === 0 && <Button 
+              name={'Send OTP'}
+              lightThemeColor={'bg-base-100 text-white'} 
+              darkThemeColor={'dark:bg-white dark:text-black'} 
+              CssClass={'p-3 w-32'}
+              type={'submit'}
+            />}
+
+            </form>
+
+            </FormProvider>
+
+          </NextButtonContext.Provider>
         </div>
 
         {/* Right Arrow */}
@@ -91,3 +148,5 @@ function SignUpContainer() {
 }
 
 export default SignUpContainer;
+
+export {NextButtonContext}

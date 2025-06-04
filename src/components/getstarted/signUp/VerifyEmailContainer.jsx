@@ -1,9 +1,12 @@
 import { OtpInput } from '../Input'
 import Button from '../Button'
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
+import {NextButtonContext} from './SignUpContainer'
 
-function VerifyEmailContainer({GotoNextPage}) {
+function VerifyEmailContainer() {
   
+  const GotoNextPage = useContext(NextButtonContext)
+
   return (
     <>
     <h1 className='font-InterBold text-3xl mb-15 mt-8'>Verification</h1>

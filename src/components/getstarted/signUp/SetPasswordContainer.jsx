@@ -1,42 +1,37 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Password } from '../Input'
-import Button from '../Button'
-import {ModelContext} from '../../../pages/Navbar'
+import { useFormContext } from 'react-hook-form';
+
 
 function SetPasswordContainer() {
-  const CloseModel = useContext(ModelContext)
-
-  function CreateAccount(){
-    CloseModel()
-  }
+  
+  const {register} = useFormContext()
+  
   
   return (
     <>
 
     <h1 className='font-InterBold text-3xl mb-10'>Set Your Key</h1>
     <Password 
-    name={'Password'}
+    lable={'Password'}
     placeholder={'Enter Password'}
     type={'password'}
+    {...register('SetPassword',{required: true})}
     />
 
     <p className='font-InterLight text-sm mt-5 pr-5 mb-6 text-left '>Passwords must be at least 6 characters and contain at least one letter and one number. Password are case sensitive.</p>
 
     <Password 
-    name={'Confirm Password'}
+    label={'Confirm Password'}
     placeholder={'Confirm Password'}
     type={'password'}
+    {...register('ConfirmPassword',{required: true})}
     />
 
-    <Button 
-      name={'Create Account'}
-      lightThemeColor={'bg-base-100 text-white'} 
-      darkThemeColor={'dark:bg-white dark:text-black'} 
-      CssClass={'p-3 w-32 mt-10'}
-      event={CreateAccount}
-    />
+    
     </>
   )
 }
+
 
 export default SetPasswordContainer
