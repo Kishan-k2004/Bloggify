@@ -1,9 +1,19 @@
 import React, { useContext } from 'react'
 import Logo from './Logo'
 import Button from './Button'
-import {ModelContext} from '../../pages/Navbar'
+import authService from '../../appwrite/appwrite'
+
+
 function ModelContainer({setview}) {
-    const CloseModel = useContext(ModelContext)
+
+    async function continueWithGoogle(){
+        try {
+            const session = authService.createOAuth2()
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
     
 
     const buttons = [
@@ -19,7 +29,7 @@ function ModelContainer({setview}) {
             lightThemeColor: "bg-white text-black",
             darkThemeColor: "dark:bg-base-100 dark:text-white",
             svg: true,
-            event: ()=>{CloseModel()}
+            event: ()=>{continueWithGoogle()}
         }
     ]
 

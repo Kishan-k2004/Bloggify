@@ -1,4 +1,4 @@
-import { Client, Account, ID } from "appwrite";
+import { Client, Account, ID, OAuthProvider } from "appwrite";
 import conf from '../conf/conf.js';
 
 export class AuthService{
@@ -11,26 +11,30 @@ export class AuthService{
     }
 
     //create+login user using email,password.
-    async createAccount({email,password,fullName,phone}){
+    async createAccount({email,password,fullName,gender,dateofbirth}){
         try {
-            const createUser = await this.account.create(ID.unique(),email,password,fullName)
-            if(createUser){
+            const createUser = await this.account.create(ID.unique(),email,password,fullName,dateofbirth,gender)
+            if (createUser) {
                 console.log(createUser)
-                const session = await this.UserLogin({email,password})
-                if(session){
-                    console.log(session)
-                    await this.account.updatePhone(`+91${phone}`,password)
-                }
+                const session = await this.userLogin({email,password})
                 return session
-                
-            }else{
+
+            } else {
                 return createUser
             }
+
         } catch (error) {
-            throw error;
+            throw error
         }
     }
-    //
+
+    // OAuth2 session creation
+    async createOAuth2(){
+        this.account.createOAuth2Session(OAuthProvider.Google,'http://localhost:5173','http://localhost:5173')
+        
+    }
+
+    //Login user
     async userLogin({email,password}){
         try{
             const User = await this.account.createEmailPasswordSession(email,password)
@@ -40,6 +44,7 @@ export class AuthService{
         }
     }
 
+    // get user details
     async getUser(){
         try {
             const User = await this.account.get()
@@ -48,6 +53,15 @@ export class AuthService{
             throw error
         }
 
+    }
+
+    // logout user
+    async userLogout(){
+        try {
+            return await this.account.deleteSessions()
+        } catch (error) {
+            throw error
+        }
     }
 
 }

@@ -5,8 +5,6 @@ import { useFormContext } from 'react-hook-form';
 
 function YourInfoContainer() {
 
-  const GotoNextPage = useContext(NextButtonContext)
-
   const {register,formState: { errors }} = useFormContext()
 
   
@@ -23,7 +21,7 @@ function YourInfoContainer() {
       label={'Full Name'} 
       placeholder={'Full name'} 
       type={'text'} 
-      {...register('FullName',{
+      {...register('fullName',{
         required: "Full Name is required",
         minLength: {
         value: 3,
@@ -35,7 +33,7 @@ function YourInfoContainer() {
         }
       })}
       />
-      {errors.FullName && <ErrorMessage msg={errors.FullName.message}/>}
+      {errors.fullName && <ErrorMessage msg={errors.fullName.message}/>}
       </div>
 
       <div>
@@ -43,7 +41,7 @@ function YourInfoContainer() {
       label={'Email'} 
       placeholder={'mail@site.com'} 
       type={'email'} 
-      {...register('Email',{
+      {...register('email',{
         required: "Email is required",
         pattern: {
         value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -51,18 +49,18 @@ function YourInfoContainer() {
       }
       })}
       />
-      {errors.Email && <ErrorMessage msg={errors.Email.message}/>}
+      {errors.email && <ErrorMessage msg={errors.email.message}/>}
       </div>
 
       <div>
       <DateofBirth
-      {...register('DateofBirth',{required: true})}
+      {...register('dateofbirth',{required: true})}
       />
       </div>
 
       <div>
       <Gender
-      {...register('Gender',{required: true})}
+      {...register('gender',{required: true})}
       />
       </div>
 

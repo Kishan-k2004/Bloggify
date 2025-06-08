@@ -7,7 +7,7 @@ function SetPasswordContainer() {
   
   const {register,watch,formState: { errors }} = useFormContext()
   
-  const password = watch('SetPassword','')
+  const password = watch('setPassword','')
   return (
     <div className='flex flex-col'>
     <div>
@@ -19,7 +19,7 @@ function SetPasswordContainer() {
     label={'Password'}
     placeholder={'Enter Password'}
     type={'password'}
-    {...register('SetPassword',{
+    {...register('setPassword',{
       required: "Password is required",
       minLength: {
         value: 6,
@@ -31,7 +31,7 @@ function SetPasswordContainer() {
       },
     })}
     />
-    {errors.SetPassword && <ErrorMessage msg={errors.SetPassword.message}/>}
+    {errors.setPassword && <ErrorMessage msg={errors.setPassword.message}/>}
     </div>
 
 
@@ -42,12 +42,12 @@ function SetPasswordContainer() {
     label={'Confirm Password'}
     placeholder={'Confirm Password'}
     type={'password'}
-    {...register('ConfirmPassword',{
+    {...register('confirmPassword',{
       required: "Please cofirm your password",
       validate: (value)=> value === password || "Password do not match"
     })}
     />
-    {errors.ConfirmPassword && <ErrorMessage msg={errors.ConfirmPassword.message}/>}
+    {errors.confirmPassword && <ErrorMessage msg={errors.confirmPassword.message}/>}
     </div>
 
     
