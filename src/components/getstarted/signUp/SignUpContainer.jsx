@@ -12,7 +12,11 @@ function SignUpContainer() {
   const [index,setIndex] = useState(0)
   const [temp, setTemp] = useState(false); // [Info, Verify, Secure,Special case]
 
-  const methods = useForm()
+  const methods = useForm({
+    defaultValues : {
+      Gender : 'Select'
+    }
+  })
   const {handleSubmit} = methods
 
   const CloseModel = useContext(ModelContext)
@@ -108,13 +112,14 @@ function SignUpContainer() {
               CssClass={'p-3 w-32 mt-10'}
               type={'submit'}
             />}
-            {index === 0 && <Button 
+            {index === 0 && <div>
+              <Button 
               name={'Send OTP'}
               lightThemeColor={'bg-base-100 text-white'} 
               darkThemeColor={'dark:bg-white dark:text-black'} 
-              CssClass={'p-3 w-32'}
+              CssClass={'p-3 w-32 mt-6'}
               type={'submit'}
-            />}
+            /> </div>}
 
             </form>
 
