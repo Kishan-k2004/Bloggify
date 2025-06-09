@@ -8,6 +8,7 @@ import { handleSendOTP } from '../../../api/ApiHandler';
 import authService from '../../../appwrite/appwrite';
 import { useDispatch } from 'react-redux';
 import { Login } from '../../../store/authSlice';
+import { toast } from 'react-toastify';
 
 
 const NextButtonContext = createContext()
@@ -61,26 +62,36 @@ function SignUpContainer() {
     }
   }
 
-  async function SubmitInfo(data){
-    try {
-      const res = await handleSendOTP(data.email)
+async function SubmitInfo(data) {
+  setLoading(true)
 
-      if(res.status === 200){
-        console.log(res.data)
-        GotoNextPage()
+  const sendOtpPromise = handleSendOTP(data.email)
 
-      }else{
-        console.log("Error occure")
-      }
+  toast.promise(sendOtpPromise, {
+    pending: 'Sending code...',
+    success: 'Email sent! Check your inbox.',
+    error: {
+      render({ data }) {
+        return data?.response?.data?.message || 'Invalid Email ID.'
+      },
+    },
+  })
 
-    } catch (error) {
-      console.log(error)
+  try {
+    const res = await sendOtpPromise
+
+    if (res.status === 200) {
+      GotoNextPage()
+    } else {
+      console.log("Unexpected response")
     }
-    finally{
-      setLoading(false)
-    }
-    
+  } catch (error) {
+    console.log(error)
+  } finally {
+    setLoading(false)
   }
+}
+
 
   async function CreateAccount(data){
 
@@ -89,19 +100,20 @@ function SignUpContainer() {
       if(session){
         const userData = await authService.getUser()
         if(userData){
+          toast.success(`Welcome ${userData.name} !`)
           dispatch(Login(userData))
           CloseModel()
 
         }else{
-          console.log("Can't get userData")
+          toast.warning("Can't get userData")
         }
 
       }else{
-        console.log("Failed to create account")
+        toast.warning("Email is already Resgistered")
       }
 
     } catch (error) {
-      console.log(error)
+      toast.warning("Email is already Resgistered")
     }
   }
 

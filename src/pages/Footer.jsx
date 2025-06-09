@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
 
 function Footer() {
+
+  
   return (
   <footer className="footer sm:footer-horizontal footer-center bg-white dark:bg-base-100 text-base-content p-4 border-t border-gray-200 dark:border-gray-700">
     <aside>

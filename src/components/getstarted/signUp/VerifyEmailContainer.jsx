@@ -4,6 +4,9 @@ import { useContext, useRef, useState, useEffect } from 'react'
 import {NextButtonContext} from './SignUpContainer'
 import { useFormContext } from 'react-hook-form'
 import { handleVerifyOTP } from '../../../api/ApiHandler'
+import { toast } from 'react-toastify'
+import {handleSendOTP} from '../../../api/ApiHandler.js'
+
 
 function VerifyEmailContainer() {
   
@@ -11,6 +14,7 @@ function VerifyEmailContainer() {
 
   const [error,setError] = useState('')
   const Inputref = useRef()
+  const [loading,setLoading] = useState(false)
 
   const {watch} = useFormContext()
   const email = watch('email')
@@ -18,13 +22,25 @@ function VerifyEmailContainer() {
 
   async function VerifyOTP(){
     setError('')
+    
     if(Inputref.current.value.length < 6){
       setError("Please enter 6 digit code")
+      
 
     }else{
+      setLoading(true)
       const otp = Inputref.current.value
+
+      const verifyOtpPromise = handleVerifyOTP(email,otp)
+
+      toast.promise(verifyOtpPromise,{
+        pending : 'Verifying Code ...',
+        success : 'Code Verified',
+        error : 'Invalid Code'
+      })
+
       try {
-        const res = await handleVerifyOTP(email,otp)
+        const res = await verifyOtpPromise
   
         if(res.status === 200){
           GotoNextPage()
@@ -35,6 +51,8 @@ function VerifyEmailContainer() {
 
       } catch (error) {
         setError(error.response.data.message)
+      }finally{
+        setLoading(false)
       }
       
 
@@ -52,6 +70,7 @@ function VerifyEmailContainer() {
 
     <div>
     <p className='font-InterLight text-sm mt-8'>Almost there — just enter the code we sent you.</p>
+    <p className='font-InterLight text-sm mt-2'>Note :- Sometime the mail is in spam section.</p>
     </div>
 
     <div> <Countdown/> </div>
@@ -59,10 +78,11 @@ function VerifyEmailContainer() {
     <div>
     <Button 
       name={'Verify'}
-      lightThemeColor={'bg-base-100 text-white'} 
-      darkThemeColor={'dark:bg-white dark:text-black'} 
+      lightThemeColor={'bg-base-100 text-white disabled:bg-gray-600'} 
+      darkThemeColor={'dark:bg-white dark:text-black dark:disabled:bg-gray-200'} 
       CssClass={'p-3 w-32 mt-12'}
       event={VerifyOTP}
+      disabled={loading}
       />
     </div>
 
@@ -73,28 +93,59 @@ function VerifyEmailContainer() {
 
 function Countdown() {
   const [time, setTime] = useState(300); // 5 minutes = 300 seconds
+  const timerRef = useRef(null);
+
+  const {watch} = useFormContext()
+  const email = watch('email')
 
   useEffect(() => {
-
-    const timer = setInterval(() => {
-        setTime(prev => {
-            if (prev <= 1) {
-                clearInterval(timer);
-                return 0;
-            }
-            return prev - 1;
-        });
-      }, 1000);
-  
-      return () => clearInterval(timer);
-      
-    }, []);
-
-    function ResendCode(){
-
-      setTime(300)
+    
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
     }
 
+    if (time > 0) {
+      timerRef.current = setInterval(() => {
+        setTime(prev => {
+          if (prev <= 1) {
+            clearInterval(timerRef.current);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => clearInterval(timerRef.current);
+  }, [time]);
+
+
+    async function ResendCode(){
+
+      const sendOtpPromise = handleSendOTP(email)
+
+      toast.promise(sendOtpPromise, {
+        pending: 'Sending code...',
+        success: 'Email sent! Check your inbox.',
+        error: {
+          render({ data }) {
+          return data?.response?.data?.message || 'Invalid Email ID.'
+        },
+      },
+    })
+
+    try {
+      const res = await sendOtpPromise
+
+      if (res.status === 200) {
+        setTime(300)
+
+      } else {
+        console.log("Unexpected response")
+
+      }
+    }catch (error) {}
+  }
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 

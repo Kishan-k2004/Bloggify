@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import authService from '../../../appwrite/appwrite'
 import { useDispatch } from 'react-redux'
 import { Login } from '../../../store/authSlice'
+import { toast } from 'react-toastify'
 
 function LoginContainer({setview}) {
 
@@ -27,14 +28,15 @@ function LoginContainer({setview}) {
         if(userData){
           dispatch(Login(userData))
           CloseModel()
+          toast.success(`Welcome ${userData.name} !`)
         }else{
-          console.log("Can't get user Data")
+          toast.warning("Can't get user Data")
         }
       }else{
-        console.log("Failed to create session")
+        toast.warning("Failed to create session")
       }
-    } catch (error) {
-      console.log(error)
+    } catch (err) {
+      toast.error('Invalid credentials')
     }
     finally{
       setLoading(false)
