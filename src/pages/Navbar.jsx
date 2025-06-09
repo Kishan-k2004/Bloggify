@@ -1,29 +1,28 @@
-import React,{createContext, useContext, useRef, useState} from 'react';
+import React,{createContext, useContext, useEffect, useRef, useState} from 'react';
 import { Model, Profile, ThemeSwitcher } from '../components/index.js';
-import authService from '../appwrite/appwrite.js';
 import { useSelector } from 'react-redux';
 
 const ModelContext = createContext()
 
 function Navbar() {
+
   const [view , setview] = useState("default") // default || signup || login
 
   const Modelref = useRef()
-
-  const authStatus = useSelector((state)=> state.authentication.status)
-  const userData = useSelector((state)=> state.authentication.data)
-  console.log(userData)
-
-
+  
   function CloseModle(){
     Modelref.current.checked = false;
   }
+
+
+  const authStatus = useSelector((state)=> state.authentication.status)
+
 
   const navItem = [
     {
       name : "Stories",
       status : true,
-      slug : '/Blogs'
+      slug : '/stories'
     },
     {
       name : "About Me",
@@ -42,12 +41,12 @@ function Navbar() {
     {
       name : "Add Story",
       status : authStatus,
-      slug : '/create-blog'
+      slug : '/add-story'
     },
     {
       name : "My Space",
       status : authStatus,
-      slug : '/my-blogs'
+      slug : '/my-space'
     }
   ]
     

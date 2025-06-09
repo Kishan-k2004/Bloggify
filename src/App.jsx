@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-
-import { Navbar,Footer } from './pages/index.js'
 import { ThemeProvider } from './context/theme.js'
+import Router from './Router.jsx'
+
 
 function App() {
 
@@ -31,13 +31,8 @@ function App() {
 
   return (
     <ThemeProvider value={{darkMode,toggleDarkMode}}>
-      <div className="min-h-screen w-full flex flex-col">
-        <Navbar />
-        <main className="flex-grow">
-          {/* Other content here */}
-        </main>
-        <footer><Footer/></footer>
-</div>
+
+      <Router/>
 
     </ThemeProvider>
 

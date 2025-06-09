@@ -30,7 +30,7 @@ export class AuthService{
 
     // OAuth2 session creation
     async createOAuth2(){
-        this.account.createOAuth2Session(OAuthProvider.Google,'http://localhost:5173','http://localhost:5173')
+        this.account.createOAuth2Session(OAuthProvider.Google,'http://localhost:5173/authentication-successful','http://localhost:5173/authentication-failed')
         
     }
 

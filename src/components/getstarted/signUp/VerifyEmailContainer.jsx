@@ -55,21 +55,32 @@ function Countdown() {
   const [time, setTime] = useState(300); // 5 minutes = 300 seconds
 
   useEffect(() => {
-    if (time <= 0) return;
 
     const timer = setInterval(() => {
-      setTime(prev => prev - 1);
-    }, 1000);
+        setTime(prev => {
+            if (prev <= 1) {
+                clearInterval(timer);
+                return 0;
+            }
+            return prev - 1;
+        });
+      }, 1000);
+  
+      return () => clearInterval(timer);
+      
+    }, []);
 
-    return () => clearInterval(timer); // cleanup on unmount or time change
-  }, [time]);
+    function ResendCode(){
+
+      setTime(300)
+    }
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
   return (
     (time === 0)?(
-      <p className='font-InterLight text-sm mt-1 cursor-pointer text-blue-500'> Resend code</p>
+      <p className='font-InterLight text-sm mt-1 cursor-pointer text-blue-500' onClick={ResendCode}> Resend code</p>
     ):(
       <p className='font-InterLight text-sm mt-1 text-red-500 cursor-pointer'>
       Code expires in {minutes}:{seconds < 10 ? '0' + seconds : seconds}
