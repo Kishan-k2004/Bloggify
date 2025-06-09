@@ -4,20 +4,25 @@ import StepsContainer from './StepsContainer';
 import { useForm, FormProvider } from 'react-hook-form';
 import Button from '../Button'
 import {ModelContext} from '../../../pages/Navbar'
+import { handleSendOTP } from '../../../api/ApiHandler';
+import authService from '../../../appwrite/appwrite';
+import { useDispatch } from 'react-redux';
+import { Login } from '../../../store/authSlice';
+
 
 const NextButtonContext = createContext()
+
 
 function SignUpContainer() {
   
   const [index,setIndex] = useState(0)
   const [temp, setTemp] = useState(false); // [Info, Verify, Secure,Special case]
+  const [loading , setLoading] = useState(false)
 
-  const methods = useForm({
-    defaultValues : {
-      Gender : 'Select'
-    }
-  })
-  const {handleSubmit} = methods
+  const methods = useForm({ defaultValues : { Gender : 'Select' } })
+  const {handleSubmit,formState} = methods
+
+  const dispatch = useDispatch()
 
   const CloseModel = useContext(ModelContext)
   
@@ -47,6 +52,7 @@ function SignUpContainer() {
 
   function onSubmit(data){
     if(index === 0){
+      setLoading(true)
       SubmitInfo(data)
 
     }else{
@@ -55,14 +61,48 @@ function SignUpContainer() {
     }
   }
 
-  function SubmitInfo(data){
-    console.log(data)
-    GotoNextPage()
+  async function SubmitInfo(data){
+    try {
+      const res = await handleSendOTP(data.email)
+
+      if(res.status === 200){
+        console.log(res.data)
+        GotoNextPage()
+
+      }else{
+        console.log("Error occure")
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+    finally{
+      setLoading(false)
+    }
+    
   }
 
-  function CreateAccount(data){
-    console.log(data)
-    CloseModel()
+  async function CreateAccount(data){
+
+    try {
+      const session = await authService.createAccount(data)
+      if(session){
+        const userData = await authService.getUser()
+        if(userData){
+          dispatch(Login(userData))
+          CloseModel()
+
+        }else{
+          console.log("Can't get userData")
+        }
+
+      }else{
+        console.log("Failed to create account")
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 
@@ -106,19 +146,21 @@ function SignUpContainer() {
             <StepsContainer index={index} />
 
             {index === 2 && <Button 
-              name={'Create Account'}
+              name={formState.isSubmitting? 'Creating ...':'Create Account'}
               lightThemeColor={'bg-base-100 text-white'} 
               darkThemeColor={'dark:bg-white dark:text-black'} 
-              CssClass={'p-3 w-32 mt-10'}
+              CssClass={'p-3 w-32 mt-10 disabled:bg-gray-500'}
               type={'submit'}
+              disabled={formState.isSubmitting}
             />}
             {index === 0 && <div>
               <Button 
-              name={'Send OTP'}
+              name={loading? 'Sending ...':'Send OTP'}
               lightThemeColor={'bg-base-100 text-white'} 
               darkThemeColor={'dark:bg-white dark:text-black'} 
-              CssClass={'p-3 w-32 mt-6'}
+              CssClass={'p-3 w-32 mt-6 disabled:bg-gray-500'}
               type={'submit'}
+              disabled={loading}
             /> </div>}
 
             </form>
@@ -129,7 +171,7 @@ function SignUpContainer() {
         </div>
 
         {/* Right Arrow */}
-        <div className='flex items-center h-full'>
+        <div className='flex items-center h-full bg-gra'>
           <svg
             className={`w-6 h-6 ${(index === 0 && temp )?"cursor-pointer text-base-100 dark:text-white":"text-gray-200 dark:text-base-100 pointer-events-none"}`}
             onClick={GotoNextPage}

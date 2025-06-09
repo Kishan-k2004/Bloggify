@@ -1,6 +1,7 @@
-import React,{createContext, useContext, useEffect, useRef, useState} from 'react';
+import React,{createContext, useRef, useState} from 'react';
 import { Model, Profile, ThemeSwitcher } from '../components/index.js';
 import { useSelector } from 'react-redux';
+import {startServer} from '../api/ApiHandler.js'
 
 const ModelContext = createContext()
 
@@ -34,6 +35,7 @@ function Navbar() {
       status : !authStatus,
       slug : '/get-started',
       event : ()=> {
+        startServer()
         Modelref.current.checked = true
         setview("default")
       }

@@ -2,6 +2,8 @@ import { OtpInput,ErrorMessage } from '../Input'
 import Button from '../Button'
 import { useContext, useRef, useState, useEffect } from 'react'
 import {NextButtonContext} from './SignUpContainer'
+import { useFormContext } from 'react-hook-form'
+import { handleVerifyOTP } from '../../../api/ApiHandler'
 
 function VerifyEmailContainer() {
   
@@ -10,13 +12,31 @@ function VerifyEmailContainer() {
   const [error,setError] = useState('')
   const Inputref = useRef()
 
-  function VerifyOTP(){
+  const {watch} = useFormContext()
+  const email = watch('email')
+
+
+  async function VerifyOTP(){
     setError('')
     if(Inputref.current.value.length < 6){
       setError("Please enter 6 digit code")
 
     }else{
-      GotoNextPage()
+      const otp = Inputref.current.value
+      try {
+        const res = await handleVerifyOTP(email,otp)
+  
+        if(res.status === 200){
+          GotoNextPage()
+  
+        }else{
+          setError(res.data)
+        }
+
+      } catch (error) {
+        setError(error.response.data.message)
+      }
+      
 
     }
   }

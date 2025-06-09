@@ -7,7 +7,9 @@ function SetPasswordContainer() {
   
   const {register,watch,formState: { errors }} = useFormContext()
   
-  const password = watch('setPassword','')
+  const password = watch('password','')
+
+  
   return (
     <div className='flex flex-col'>
     <div>
@@ -19,11 +21,11 @@ function SetPasswordContainer() {
     label={'Password'}
     placeholder={'Enter Password'}
     type={'password'}
-    {...register('setPassword',{
+    {...register('password',{
       required: "Password is required",
       minLength: {
-        value: 6,
-        message: "Password must be at least 6 characters",
+        value: 8,
+        message: "Password must be at least 8 characters",
       },
       pattern: {
         value: /^(?=.*[!@#$%^&*])/,
@@ -31,11 +33,11 @@ function SetPasswordContainer() {
       },
     })}
     />
-    {errors.setPassword && <ErrorMessage msg={errors.setPassword.message}/>}
+    {errors.password && <ErrorMessage msg={errors.password.message}/>}
     </div>
 
 
-    <p className='font-InterLight text-sm mt-5 pr-5 mb-6 text-left '>Passwords must be at least 6 characters and contain at least one letter and one number. Password are case sensitive.</p>
+    <p className='font-InterLight text-sm mt-5 pr-5 mb-6 text-left '>Passwords must be at least 8 characters and contain at least one special character. Password are case sensitive.</p>
 
     <div>
     <Password 
