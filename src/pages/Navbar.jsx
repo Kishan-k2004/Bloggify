@@ -21,9 +21,9 @@ function Navbar() {
 
   const navItem = [
     {
-      name : "Stories",
+      name : "Blogs",
       status : true,
-      slug : '/stories'
+      slug : '/blogs'
     },
     {
       name : "About Me",
@@ -41,9 +41,9 @@ function Navbar() {
       }
     },
     {
-      name : "Add Story",
+      name : "Add Blogs",
       status : authStatus,
-      slug : '/add-story'
+      slug : '/add-blogs'
     },
     {
       name : "My Space",
