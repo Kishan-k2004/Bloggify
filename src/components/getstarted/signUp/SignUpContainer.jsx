@@ -9,6 +9,7 @@ import authService from '../../../appwrite/appwrite';
 import { useDispatch } from 'react-redux';
 import { Login } from '../../../store/authSlice';
 import { toast } from 'react-toastify';
+import profileService from '../../../appwrite/appwriteUserProfile';
 
 
 const NextButtonContext = createContext()
@@ -65,6 +66,17 @@ function SignUpContainer() {
 async function SubmitInfo(data) {
   setLoading(true)
 
+  try {
+    const checkEmail = await profileService.haveUser(data.email)
+    if(checkEmail){
+      toast.error("Email already exist.")
+      setLoading(false)
+      return
+    }
+  } catch (error) {
+    console.log(error)
+  }
+
   const sendOtpPromise = handleSendOTP(data.email)
 
   toast.promise(sendOtpPromise, {
@@ -100,6 +112,15 @@ async function SubmitInfo(data) {
       if(session){
         const userData = await authService.getUser()
         if(userData){
+          
+          await profileService.addAccount({
+            fullname : data.fullName,
+            dateofbirth : data.dateofbirth,
+            gender : data.gender,
+            email : data.email,
+            userId : userData.$id
+          })
+
           toast.success(`Welcome ${userData.name} !`)
           dispatch(Login(userData))
           CloseModel()

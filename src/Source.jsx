@@ -1,8 +1,11 @@
 import React from 'react'
 import { Navbar,Footer } from './pages/index'
-import { Outlet } from 'react-router'
+import { Outlet, useParams } from 'react-router'
 
 function Source() {
+
+  
+
   return (
     <div className="min-h-screen w-full flex flex-col">
         <Navbar />

@@ -51,6 +51,7 @@ const Gender = React.forwardRef(({...props},ref)=>{
       <label className="select w-full bg-gray-200 dark:bg-base-100 no-focus border-black dark:border-white">
         <span className="label font-Inter-Regular bg-gray-200 dark:bg-base-100">Gender</span>
         <select {...props} ref={ref} >
+          <option className='font-Inter-Regular' value={''} >-- Select --</option>
           <option className='font-Inter-Regular' value={'Male'}>Male</option>
           <option className='font-Inter-Regular' value={'Female'}>Female</option>
           <option className='font-Inter-Regular' value={'Other'}>Other</option>

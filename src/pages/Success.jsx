@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router'
 import authService from '../appwrite/appwrite.js'
 import { useDispatch } from 'react-redux'
 import { Login } from '../store/authSlice.js'
+import profileService from '../appwrite/appwriteUserProfile.js'
 
 
 function Success() {
@@ -17,11 +18,22 @@ function Success() {
         try {
             const userData = await authService.getUser()
             if(userData){
+                await profileService.addAccount({
+                    fullname: userData.name,
+                    email: userData.email,
+                    userId: userData.$id
+                })
+
                 dispatch(Login(userData))
-                navigate('/')
+                setTimeout(() => {
+                    navigate('/')
+                }, 2000);
+                
             }
+
         } catch (error) {
             console.log(error)
+            
         }}
 
         fetchUser()

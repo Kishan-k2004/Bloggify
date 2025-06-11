@@ -17,6 +17,7 @@ function Navbar() {
 
 
   const authStatus = useSelector((state)=> state.authentication.status)
+  
 
 
   const navItem = [

@@ -39,6 +39,7 @@ function App() {
       authService.getUser().then((userData)=>{
         if(userData){
           dispatch(Login(userData))
+          
         }else{
           dispatch(Logout())
         }
@@ -55,13 +56,13 @@ function App() {
       stacked
       position='top-left'
       autoClose={3000}
-      hideProgressBar={false}
+      hideProgressBar={true}
       newestOnTop={false}
       closeOnClick
       style={{ zIndex: 9999 }}
       theme={darkMode? 'dark':'light'}
       toastClassName={() =>
-        "bg-white dark:bg-base-100 text-black dark:text-white border-0 dark:border-base-300 shadow-md flex flex-row pt-3 md:pt-6 pb-3 md:pb-6 pr-3 pl-3 font-Inter-Regular"
+        "bg-white dark:bg-base-100 text-black dark:text-white border-0 dark:border-base-300 shadow-md flex flex-row pt-3 md:pt-5 pb-3 md:pb-5 pr-3 pl-3 font-Inter-Regular"
       }
       bodyClassName="text-sm p-3"
       progressClassName="bg-primary"

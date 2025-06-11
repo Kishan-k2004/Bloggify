@@ -54,14 +54,16 @@ function YourInfoContainer() {
 
       <div>
       <DateofBirth
-      {...register('dateofbirth',{required: true})}
+      {...register('dateofbirth',{required: "Date of birth is required"})}
       />
+      {errors.dateofbirth && <ErrorMessage msg={errors.dateofbirth.message}/>}
       </div>
 
       <div>
       <Gender
-      {...register('gender',{required: true})}
+      {...register('gender',{required: "Select your gender"})}
       />
+      {errors.gender && <ErrorMessage msg={errors.gender.message}/>}
       </div>
 
       
