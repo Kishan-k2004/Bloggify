@@ -2,6 +2,7 @@ import React,{createContext, useRef, useState} from 'react';
 import { Model, Profile, ThemeSwitcher } from '../components/index.js';
 import { useSelector } from 'react-redux';
 import {startServer} from '../api/ApiHandler.js'
+import { Link } from 'react-router';
 
 const ModelContext = createContext()
 
@@ -24,7 +25,7 @@ function Navbar() {
     {
       name : "Blogs",
       status : true,
-      slug : '/blogs'
+      slug : '/'
     },
     {
       name : "About Me",
@@ -34,7 +35,6 @@ function Navbar() {
     {
       name : "Get Started",
       status : !authStatus,
-      slug : '/get-started',
       event : ()=> {
         startServer()
         Modelref.current.checked = true
@@ -68,7 +68,7 @@ function Navbar() {
           </button>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white dark:bg-base-100 text-base-100 dark:text-white rounded-box w-52">
             {navItem.map((item)=>(
-              item.status && <li key={item.name}><a onClick={item.event && item.event}>{item.name}</a></li>
+              item.status && <li key={item.name}><Link to={item.slug || ''} onClick={item.event && item.event}>{item.name}</Link></li>
             ))}
           </ul>
         </div>
@@ -82,7 +82,7 @@ function Navbar() {
         <ul className="flex gap-6 px-3">
           {
             navItem.map((item)=>(
-              item.status && <li key={item.name}> <a href="#" onClick={item.event &&  item.event} className="text-base-100 dark:text-white hover:underline underline-offset-4 transition duration-200">{item.name}</a> </li>
+              item.status && <li key={item.name}> <Link to={item.slug || ''} onClick={item.event &&  item.event} className="text-base-100 dark:text-white hover:underline underline-offset-4 transition duration-200">{item.name}</Link> </li>
             ))
           }
         </ul>

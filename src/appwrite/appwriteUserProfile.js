@@ -52,6 +52,7 @@ export class ProfileService{
         }
     }
 
+
     async updateUserData({userId,...props}){
         try {
             if (!userId || Object.keys(props).length === 0) {
@@ -65,6 +66,24 @@ export class ProfileService{
                 {...props}
             )
             return userData
+            
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async getUserData(userId){
+        try {
+            
+            const userData = await this.database.getDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteUserProfileCollectionId,
+                userId
+            )
+
+            const {fullname,gender,bio,email,profileImg,coverImage,dateofbirth,$id} = userData
+            
+            return {fullname,gender,bio,email,profileImg,coverImage,dateofbirth,$id}
             
         } catch (error) {
             throw error

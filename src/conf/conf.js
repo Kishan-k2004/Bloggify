@@ -7,7 +7,8 @@ const conf = {
     appwriteBucketId : String(import.meta.env.VITE_APPWRITE_BUCKET_ID),
     sendEmailApi : String(import.meta.env.VITE_SENDEMAIL_API),
     verifyEmailApi : String(import.meta.env.VITE_VERIFYEMAIL_API),
-    mailUrl : String(import.meta.env.VITE_MAIL_ENDPOINT)
+    mailUrl : String(import.meta.env.VITE_MAIL_ENDPOINT),
+    defaultBanner: String(import.meta.env.VITE_DEFAULT_COVERIMAGE)
 }
 
 export default conf
