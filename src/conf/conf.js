@@ -8,7 +8,8 @@ const conf = {
     sendEmailApi : String(import.meta.env.VITE_SENDEMAIL_API),
     verifyEmailApi : String(import.meta.env.VITE_VERIFYEMAIL_API),
     mailUrl : String(import.meta.env.VITE_MAIL_ENDPOINT),
-    defaultBanner: String(import.meta.env.VITE_DEFAULT_COVERIMAGE)
+    defaultBanner: String(import.meta.env.VITE_DEFAULT_COVERIMAGE),
+    defaultAvatar: String(import.meta.env.VITE_DEFAULT_AVATAR)
 }
 
 export default conf

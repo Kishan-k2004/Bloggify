@@ -9,7 +9,7 @@ function Banner() {
 
     const {permission,userInfo} = useContext(UserInfoContext)
 
-    const modelRef = useRef()
+    const BannermodelRef = useRef()
     const [bgImageUrl, setBgImageUrl] = useState('')
 
 
@@ -34,8 +34,8 @@ function Banner() {
       : {}
     }
     >
-        {permission && <label className='absolute inset-0 w-full h-full cursor-pointer flex items-end justify-end'>
-            <div className='bg-base-100 rounded-3xl p-2 mr-2 mb-2' onClick={()=> modelRef.current.showModal()}>
+        {permission && <label className='absolute inset-0 w-full h-full flex items-end justify-end'>
+            <div className='bg-base-100 rounded-3xl cursor-pointer p-2 mr-2 mb-2' onClick={()=> BannermodelRef.current.showModal()}>
                 <svg xmlns="http://www.w3.org/2000/svg" 
                 className='h-3 w-3 md:h-5 md:w-5 '
                 viewBox="0 -960 960 960" 
@@ -48,7 +48,7 @@ function Banner() {
         </label>}
     </div>
 
-    <Model ref={modelRef} bg={bgImageUrl} setbg={setBgImageUrl} />
+    <Model ref={BannermodelRef} bg={bgImageUrl} setbg={setBgImageUrl} />
     </>
   )
 }
@@ -91,7 +91,7 @@ const Model = React.forwardRef(({bg,setbg},ref)=>{
     
     return(
         <>
-        <dialog id="my_modal_3" className="modal" ref={ref}>
+        <dialog id="banner_model" className="modal" ref={ref}>
             <div className="modal-box h-80 w-90 bg-white dark:bg-base-100">
 
                 <form method="dialog" className='float-right'>
@@ -111,9 +111,9 @@ const Model = React.forwardRef(({bg,setbg},ref)=>{
                     ))}
                     
                     <div className='relative rounded-xl border-1 border-dashed border-base-100 dark:border-white'>
-                        <label htmlFor="choosefile" className='absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer'>
+                        <label htmlFor="chooseBannerImage" className='absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer'>
                             <p className='font-Inter-Regular text-sm text-base-100 hover:text-gray-500 dark:text-white' >Choose Imgae <br/> <span className='text-xs font-InterLight'>2560px X 1440px</span> </p>
-                            <input id='choosefile' type="file" className='hidden' onChange={handleImageSubmit} />
+                            <input id='chooseBannerImage' type="file" className='hidden' onChange={handleImageSubmit} />
                         </label>
                     </div>
 

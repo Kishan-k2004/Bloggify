@@ -3,8 +3,9 @@ import { ThemeProvider } from './context/theme.js'
 import Router from './Router.jsx'
 import authService from './appwrite/appwrite.js'
 import { useDispatch } from 'react-redux'
-import { Login, Logout } from './store/authSlice.js'
+import { Login, Logout, UpdateProfile } from './store/authSlice.js'
 import { ToastContainer } from 'react-toastify'
+import profileService from './appwrite/appwriteUserProfile.js'
 
 
 function App() {
@@ -35,18 +36,24 @@ function App() {
   },[darkMode])
 
   useEffect(()=>{
+    const fetchUser = async () => {
     try {
-      authService.getUser().then((userData)=>{
-        if(userData){
-          dispatch(Login(userData))
-          
-        }else{
-          dispatch(Logout())
+      const userData = await authService.getUser();
+      if (userData) {
+        dispatch(Login(userData));
+
+        const data = await profileService.getUserData(userData.$id);
+        if (data) {
+          dispatch(UpdateProfile(data.profileImg));
         }
-      })
+      } else {
+        dispatch(Logout());
+      }
     } catch (error) {
-      console.log(error)
-    }
+      console.error("Error fetching user:", error);
+    }}
+
+  fetchUser();
   },[])
 
   return (
