@@ -6,8 +6,9 @@ import { ModelContext } from '../../../pages/Navbar'
 import { useForm } from 'react-hook-form'
 import authService from '../../../appwrite/appwrite'
 import { useDispatch } from 'react-redux'
-import { Login } from '../../../store/authSlice'
+import { Login, UpdateProfile } from '../../../store/authSlice'
 import { toast } from 'react-toastify'
+import profileService from '../../../appwrite/appwriteUserProfile'
 
 function LoginContainer({setview}) {
 
@@ -27,8 +28,14 @@ function LoginContainer({setview}) {
         const userData = await authService.getUser()
         if(userData){
           dispatch(Login(userData))
-          CloseModel()
-          toast.success(`Welcome ${userData.name} !`)
+
+          const data = await profileService.getUserData(userData.$id)
+          if(data){
+            dispatch(UpdateProfile(data.profileImg))
+            CloseModel()
+            toast.success(`Welcome ${userData.name} !`)
+          }
+          
         }else{
           toast.warning("Can't get user Data")
         }

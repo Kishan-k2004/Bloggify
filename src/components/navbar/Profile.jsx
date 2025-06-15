@@ -17,7 +17,7 @@ function Profile() {
         //image profile
         <div className="dropdown dropdown-end cursor-pointer">
             <div tabIndex={0}  >
-                <img class="w-10 h-10  rounded-full ring-2 ring-base-100 dark:ring-white" src={profileImg} alt="Bordered avatar"/>
+                <img className="w-10 h-10  rounded-full ring-2 ring-base-100 dark:ring-white" src={profileImg} alt="Bordered avatar"/>
             </div>
             <Dropdown/>
         </div>

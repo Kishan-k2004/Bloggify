@@ -3,7 +3,7 @@ import SuccessImage from "../assets/successImage.png"
 import { useNavigate } from 'react-router'
 import authService from '../appwrite/appwrite.js'
 import { useDispatch } from 'react-redux'
-import { Login } from '../store/authSlice.js'
+import { Login, UpdateProfile } from '../store/authSlice.js'
 import profileService from '../appwrite/appwriteUserProfile.js'
 
 
@@ -25,9 +25,16 @@ function Success() {
                 })
 
                 dispatch(Login(userData))
-                setTimeout(() => {
-                    navigate('/')
-                }, 2000);
+                
+                const data = await profileService.getUserData(userData.$id)
+                if(data){
+
+                    dispatch(UpdateProfile(data.profileImg))
+                    
+                    setTimeout(() => {
+                        navigate('/')
+                    }, 2000);
+                }
                 
             }
 

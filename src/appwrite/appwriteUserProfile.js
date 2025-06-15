@@ -81,9 +81,9 @@ export class ProfileService{
                 userId
             )
 
-            const {fullname,gender,bio,email,profileImg,coverImage,dateofbirth,$id} = userData
+            const {fullname,gender,bio,email,profileImg,coverImage,dateofbirth,$id,follower,blogs} = userData
             
-            return {fullname,gender,bio,email,profileImg,coverImage,dateofbirth,$id}
+            return {fullname,gender,bio,email,profileImg,coverImage,dateofbirth,$id,follower,blogs}
             
         } catch (error) {
             throw error
