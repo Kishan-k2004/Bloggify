@@ -339,6 +339,8 @@ function Follow(){
     }
   }
 
+  if(!data) return(<div></div>)
+
   return(isFollowing?
     (<div className='flex justify-end'>
       <button className='pr-4 pl-4 pt-2 pb-2 rounded-sm text-black dark:text-white font-InterMedium bg-none border-2 border-base-100 dark:border-white cursor-pointer' onClick={handleUnfollow}>Unfollow</button>

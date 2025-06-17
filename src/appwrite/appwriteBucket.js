@@ -56,6 +56,19 @@ export class Bucket{
             return false
         }
     }
+
+    async deleteFile(fileId){
+        try {
+            await this.storage.deleteFile(
+                conf.appwriteBucketId,
+                fileId
+            )
+
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
 }
 
 const bucket = new Bucket()
