@@ -1,11 +1,10 @@
 import conf from "../conf/conf";
-import { Client,Databases,Storage,Query } from "appwrite";
+import { Client,Databases,Query } from "appwrite";
 
 export class ProfileService{
 
     client = new Client()
     database
-    bucket
 
     constructor(){
         this.client.setEndpoint(conf.appwriteUrl)

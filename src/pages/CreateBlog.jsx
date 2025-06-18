@@ -1,16 +1,73 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import bucket from '../appwrite/appwriteBucket'
 import {TextEditor} from '../components/index.js'
 import { FormProvider, useForm, useFormContext } from 'react-hook-form'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
+import blogService from '../appwrite/appriteBlog.js'
+import profileService from '../appwrite/appwriteUserProfile.js'
 
 function CreateBlog() {
 
   const methods = useForm()
-  const {handleSubmit,register,formState: { errors }} = methods
+  const {handleSubmit,register,watch,setValue,formState: { errors,isSubmitting }} = methods
+  const userData = useSelector((data)=> data.authentication.data)
+  const navigate = useNavigate()
+  const [loading, setloading] = useState(false)
+
+  useEffect(()=>{
+    if(!userData) navigate('/')
+    
+    register('AutherId')
+    setValue('AutherId',`${userData?.$id}`)
+  },[userData])
+
+  async function handleDraft(){
+    setloading(true)
+
+    const title = watch('Title')
+    const content = watch('Content')
+    const image = watch('Image')
+    const autherId = watch('AutherId')
+    const keywords = watch('keywords')
+
+    try {
+      const blog = await blogService.draftBlog(title,content,image,autherId,keywords)
+      if(blog){
+        const userInfo = await profileService.getUserData(autherId)
+        if(userInfo){
+          const Blogarray = [...userInfo.blogs,blog.$id]
+          await profileService.updateUserData({userId:blog.AutherId,blogs: Blogarray})
+          toast.success('Uploaded to draft.')
+        }
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error('Error, Please try again.')
+    } finally{
+      setloading(false)
+    }
+  }
 
   async function onSubmit(data){
-    console.log(data)
+
+    try {
+      const blog = await blogService.publishBlog(data)
+      if(blog){
+        const userInfo = await profileService.getUserData(blog.AutherId)
+        if(userInfo){
+          const Blogarray = [...userInfo.blogs,blog.$id]
+          await profileService.updateUserData({userId:blog.AutherId,blogs: Blogarray})
+          toast.success('Blog Published Successfully')
+        }
+        
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error('Error, Please try again.')
+    }
+
   }
 
   return (
@@ -42,7 +99,9 @@ function CreateBlog() {
       </div>
 
       <div className='w-full pr-12 pl-12'>
-        <TextEditor/>
+        <TextEditor name='Content'/>
+        <input type="hidden" {...register('Content',{validate : (value)=> value !== '' || "Blog content should not be empty"})} />
+        {errors.Content && <p className='text-red-500 font-InterLight text-sm mt-1'>{errors.Content.message}</p>}
       </div>
 
       <div className='w-full pr-12 pl-12'>
@@ -59,14 +118,14 @@ function CreateBlog() {
         {errors.keywords && <p className='text-orange-500 font-InterLight text-sm mt-1'>{errors.keywords.message}</p>}
       </div>
 
-      <div className='grid grid-cols-2 gap-10 w-full pr-12 pl-12'>
+      <div className='grid grid-cols-2 gap-10 w-full pr-12 pl-12 mb-20'>
 
         <div>
-          <button type='button' className='btn font-InterLight w-full mb-5 p-6 bg-base-100 dark:bg-white text-white dark:text-black'>Save</button>
+          <button type='button' className='btn font-InterLight w-full mb-5 p-6 bg-base-100 dark:bg-white text-white dark:text-black disabled:border-black disabled:text-black dark:disabled:text-white dark:disabled:border-white' onClick={handleDraft} disabled={loading}>Save</button>
         </div>
 
         <div>
-          <button type='submit' className='btn font-InterLight w-full mb-5 p-6 bg-base-100 dark:bg-white text-white dark:text-black'>Publish</button>
+          <button type='submit' className='btn font-InterLight w-full mb-5 p-6 bg-base-100 dark:bg-white text-white dark:text-black disabled:border-black disabled:text-black dark:disabled:text-white dark:disabled:border-white' disabled={isSubmitting}>Publish</button>
         </div>
 
       </div>
