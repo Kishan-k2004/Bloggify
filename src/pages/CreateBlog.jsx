@@ -153,7 +153,8 @@ function BlogImage(){
           name: Imagefile.name,
         };
         setfile(fileObj)
-        setValue('Image',Imagefile.$id)
+        const image = await bucket.getFilePreview(Imagefile.$id)
+        setValue('Image',image.href)
 
       }else{
         toast.warning('Please select a Image')

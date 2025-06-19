@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import bucket from '../../appwrite/appwriteBucket'
 import conf from '../../conf/conf'
-import { UserInfoContext } from '../../pages/Profile'
+import UserInfoContext from '../../context/UserInfoContext.js'
 import profileService from '../../appwrite/appwriteUserProfile'
 
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { UserInfoContext } from '../../pages/Profile'
+import UserInfoContext from '../../context/UserInfoContext.js'
 import conf from '../../conf/conf'
 import bucket from '../../appwrite/appwriteBucket'
 import profileService from '../../appwrite/appwriteUserProfile'

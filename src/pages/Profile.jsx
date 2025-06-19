@@ -4,11 +4,7 @@ import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import profileService from '../appwrite/appwriteUserProfile';
 import { toast } from 'react-toastify';
-
-const UserInfoContext = createContext({
-  userInfo : null,
-  permission : false
-})
+import UserInfoContext from '../context/UserInfoContext.js';
 
 function Profile() {
 
@@ -54,7 +50,7 @@ function Profile() {
         <ProfileContainer/>
       </div>
 
-      <div>
+      <div className='mt-5'>
         <UserBlogContainer/>
       </div>
 
@@ -64,5 +60,3 @@ function Profile() {
 }
 
 export default Profile
-
-export {UserInfoContext}

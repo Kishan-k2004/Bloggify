@@ -94,6 +94,19 @@ export class BlogService{
         }
     }
 
+    async getBlog(blogId){
+        try {
+            return await this.database.getDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteBlogCollectionId,
+                blogId
+            )
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
+
 
     
 }
