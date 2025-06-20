@@ -20,7 +20,7 @@ function Profile() {
       setPermission(true)
     }
      
-  },[data])
+  },[data,user.username])
 
   useEffect(()=>{
     const fetchUserData = async()=>{
@@ -36,7 +36,7 @@ function Profile() {
     }
 
     fetchUserData()   
-  },[])
+  },[user.username])
 
   return (
     <UserInfoContext.Provider value={{userInfo,permission}}>

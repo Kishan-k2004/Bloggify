@@ -45,11 +45,6 @@ function Navbar() {
       name : "Add Blogs",
       status : authStatus,
       slug : '/add-blogs'
-    },
-    {
-      name : "My Space",
-      status : authStatus,
-      slug : '/my-space'
     }
   ]
     

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {Input,DateofBirth,Gender,ErrorMessage} from '../Input'
-import {NextButtonContext} from './SignUpContainer'
+import NextButtonContext from '../../../context/NextbuttonContext.js'
 import { useFormContext } from 'react-hook-form';
 
 function YourInfoContainer() {

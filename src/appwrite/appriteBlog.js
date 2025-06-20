@@ -107,6 +107,34 @@ export class BlogService{
         }
     }
 
+    async deleteBlog(blogId){
+        try {
+            await this.database.deleteDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteBlogCollectionId,
+                blogId
+            )
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
+
+    async updateBlog({blogId,...props}){
+        try {
+            return await this.database.updateDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteBlogCollectionId,
+                blogId,
+                {...props}
+
+            )
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
+
 
     
 }

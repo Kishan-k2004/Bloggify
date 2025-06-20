@@ -10,9 +10,8 @@ import { useDispatch } from 'react-redux';
 import { Login } from '../../../store/authSlice';
 import { toast } from 'react-toastify';
 import profileService from '../../../appwrite/appwriteUserProfile';
+import NextButtonContext from '../../../context/NextbuttonContext.js'
 
-
-const NextButtonContext = createContext()
 
 
 function SignUpContainer() {
@@ -228,5 +227,3 @@ async function SubmitInfo(data) {
 }
 
 export default SignUpContainer;
-
-export {NextButtonContext}

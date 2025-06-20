@@ -1,7 +1,7 @@
 import { OtpInput,ErrorMessage } from '../Input'
 import Button from '../Button'
 import { useContext, useRef, useState, useEffect } from 'react'
-import {NextButtonContext} from './SignUpContainer'
+import NextButtonContext from '../../../context/NextbuttonContext.js'
 import { useFormContext } from 'react-hook-form'
 import { handleVerifyOTP } from '../../../api/ApiHandler'
 import { toast } from 'react-toastify'
