@@ -120,13 +120,37 @@ export class BlogService{
         }
     }
 
-    async updateBlog({blogId,...props}){
+    async updateBlog({blogId,Title,Content,Image,keywords,Status}){
+
+        function getcurrentdateinfo(){
+            const today = new Date()
+
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+            const day = days[today.getDay()]
+
+            const dd = String(today.getDate()).padStart(2, '0')
+            const mm = String(today.getMonth() + 1).padStart(2, '0')
+            const yyyy = today.getFullYear()
+
+            return `${day},${dd}/${mm}/${yyyy}`
+        }
+
         try {
+
+            const formattedDate = getcurrentdateinfo()
+            const keywordsArray = keywords.split(',').map(k => k.trim())
             return await this.database.updateDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteBlogCollectionId,
                 blogId,
-                {...props}
+                {
+                    Title,
+                    Content,
+                    Image,
+                    keywords:keywordsArray,
+                    Date:formattedDate,
+                    Status
+                }
 
             )
         } catch (error) {
@@ -134,6 +158,25 @@ export class BlogService{
             return false
         }
     }
+
+    async changeBlogStatus({blogId,Status}){
+        try {
+
+            return await this.database.updateDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteBlogCollectionId,
+                blogId,
+                {Status}
+
+            )
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
+    
+
+    
 
 
     

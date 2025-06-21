@@ -7,12 +7,14 @@ import Underline from '@tiptap/extension-underline'
 import { useEditor, EditorContent  } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import './Tiptap.css'
-import React, { useEffect } from 'react'
+import React, { useEffect,useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-function TextEditor({name}) {
+function TextEditor({name,Initialcontent}) {
 
   const { setValue } = useFormContext()
+  const hasSetInitial = useRef(false);
+
 
   const editor = useEditor({
     extensions: [
@@ -27,7 +29,8 @@ function TextEditor({name}) {
       })
 
     ],
-    content: '',
+    
+    content:'',
     onUpdate({ editor }) {
       const planeText = editor.getText().replace(/\n/g,'').trim()
 
@@ -35,12 +38,21 @@ function TextEditor({name}) {
         setValue(name,'')
 
       }else{
-        setValue(name,editor.getHTML())
+        setValue(name,editor.getHTML(),{ shouldValidate: true })
 
       }
     }
    
   })
+
+
+
+  useEffect(() => {
+    if (editor && Initialcontent && !hasSetInitial.current) {
+      editor.commands.setContent(Initialcontent);
+      hasSetInitial.current = true;
+    }
+  }, [editor, Initialcontent]);
 
 
   if(!editor) return null

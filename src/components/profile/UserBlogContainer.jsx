@@ -44,7 +44,7 @@ function UserBlogContainer() {
 
   async function toggleBlogStatus(blogId,Status){
     try {
-      const updatedblog = await blogService.updateBlog({blogId,Status})
+      const updatedblog = await blogService.changeBlogStatus({blogId,Status})
       if(updatedblog){
         const newBlog = await blogService.getBlog(blogId)
         const updatedList = blogList.map((blog)=> blog.$id === blogId? newBlog:blog )
@@ -162,7 +162,7 @@ function UserBlogContainer() {
                 </svg> </div>
                 <ul tabIndex={0} className="dropdown-content menu bg-white dark:bg-base-100 rounded-box z-1 w-30 p-2 shadow-sm font-InterMedium">
                   <li className='p-2 cursor-pointer' onClick={()=> toggleBlogStatus(blog.$id,true)}>Publish</li>
-                  <li className='p-2 cursor-pointer'>Edit</li>
+                  {permission && <li className='p-2 cursor-pointer'onClick={()=> navigate(`/edit-blog/${blog.$id}/${blog.Title}`)}>Edit</li>}
                   <li className='p-2 cursor-pointer text-red-500' onClick={()=> handleDelete(blog.$id)}>Delete</li>
                 </ul>
                 </div>}
