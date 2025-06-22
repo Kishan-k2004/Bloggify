@@ -7,5 +7,6 @@ import CreateBlog from "./CreateBlog"
 import AboutMe from "./AboutMe"
 import UpdateBlog from "./UpdateBlog"
 import Profile from "./Profile"
+import ViewBlog from "./ViewBlog"
 
-export {Navbar,Footer,Success,Failure,Blogs,CreateBlog,AboutMe,UpdateBlog,Profile}
+export {Navbar,Footer,Success,Failure,Blogs,CreateBlog,AboutMe,UpdateBlog,Profile,ViewBlog}

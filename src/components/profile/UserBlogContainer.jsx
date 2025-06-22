@@ -104,7 +104,7 @@ function UserBlogContainer() {
                 ></div>)}
             </figure>
             <div className="card-body">
-              <h2 className="card-title truncate">
+              <h2 className="card-title truncate cursor-pointer" onClick={()=> navigate(`/blog/${blog.$id}/${blog.Title}`)}>
                 {blog.Title}
               </h2>
 
@@ -147,7 +147,7 @@ function UserBlogContainer() {
                 ></div>)}
             </figure>
             <div className="card-body">
-              <h2 className="card-title truncate">
+              <h2 className="card-title truncate cursor-pointer" onClick={()=> navigate(`/blog/${blog.$id}/${blog.Title}`)}>
                 {blog.Title}
               </h2>
               <div className='flex '>

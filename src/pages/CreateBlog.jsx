@@ -4,7 +4,7 @@ import bucket from '../appwrite/appwriteBucket'
 import {TextEditor} from '../components/index.js'
 import { FormProvider, useForm, useFormContext } from 'react-hook-form'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { data, useNavigate } from 'react-router'
 import blogService from '../appwrite/appriteBlog.js'
 import profileService from '../appwrite/appwriteUserProfile.js'
 
@@ -40,6 +40,7 @@ function CreateBlog() {
           const Blogarray = [...userInfo.blogs,blog.$id]
           await profileService.updateUserData({userId:blog.AutherId,blogs: Blogarray})
           toast.success('Uploaded to draft.')
+          navigate(`/profile/${userData.$id}/${userData.name}`)
         }
       }
     } catch (error) {
@@ -60,6 +61,7 @@ function CreateBlog() {
           const Blogarray = [...userInfo.blogs,blog.$id]
           await profileService.updateUserData({userId:blog.AutherId,blogs: Blogarray})
           toast.success('Blog Published Successfully')
+          navigate(`/blog/${blog.$id}/${blog.Title}`)
         }
         
       }

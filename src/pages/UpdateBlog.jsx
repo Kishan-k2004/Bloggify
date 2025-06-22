@@ -63,7 +63,7 @@ function UpdateBlog() {
       if(blog){
         
         toast.success('Blog Updated Successfully.')
-        
+        navigate(`/profile/${userData.$id}/${userData.name}`)
       }
     } catch (error) {
       console.log(error)
@@ -83,7 +83,7 @@ function UpdateBlog() {
       if(blog){
         
         toast.success('Blog Updated Successfully')
-        
+        navigate(`/blog/${blog.$id}/${blog.Title}`)
         
       }
     } catch (error) {

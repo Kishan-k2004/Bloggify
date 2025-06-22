@@ -174,7 +174,36 @@ export class BlogService{
             return false
         }
     }
+
+    async toggleLikeDislike({blogId,...props}){
+        try {
+
+            return await this.database.updateDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteBlogCollectionId,
+                blogId,
+                {...props}
+
+            )
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
     
+    async getSimilarBlog(keywords){
+        if(keywords.length === 0) return false
+        try {
+            return await this.database.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteBlogCollectionId,
+                [Query.equal('keywords',keywords)]
+            )
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
 
     
 
