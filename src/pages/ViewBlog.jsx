@@ -257,7 +257,7 @@ function SimilarBlog({keywords=[]}){
             ))
             :
             <div>
-                <p className='font-Inter-Regular text-center'>No similar blog available.</p>
+                <p className='font-Inter-Regular text-center text-black dark:text-white'>No similar blog available.</p>
             </div>}
 
         </div>

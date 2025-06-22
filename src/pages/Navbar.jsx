@@ -3,8 +3,8 @@ import { Model, Profile, ThemeSwitcher } from '../components/index.js';
 import { useSelector } from 'react-redux';
 import {startServer} from '../api/ApiHandler.js'
 import { Link } from 'react-router';
+import ModelContext from '../context/ModelContext.js'
 
-const ModelContext = createContext()
 
 function Navbar() {
 
@@ -29,7 +29,7 @@ function Navbar() {
     },
     {
       name : "About Me",
-      status : !authStatus,
+      status : true,
       slug : '/about'
     },
     {
@@ -103,4 +103,3 @@ function Navbar() {
 }
 
 export default Navbar;
-export {ModelContext}

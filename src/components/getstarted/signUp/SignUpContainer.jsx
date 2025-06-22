@@ -3,7 +3,7 @@ import Steps from './Steps';
 import StepsContainer from './StepsContainer';
 import { useForm, FormProvider } from 'react-hook-form';
 import Button from '../Button'
-import {ModelContext} from '../../../pages/Navbar'
+import ModelContext from '../../../context/ModelContext.js'
 import { handleSendOTP } from '../../../api/ApiHandler';
 import authService from '../../../appwrite/appwrite';
 import { useDispatch } from 'react-redux';

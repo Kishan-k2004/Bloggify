@@ -205,6 +205,58 @@ export class BlogService{
         }
     }
 
+    async getRecentBlog(){
+        try {
+            return await this.database.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteBlogCollectionId,
+                [
+                    Query.equal('Status',[true]),
+                    Query.orderDesc('$updatedAt'),
+                    Query.limit(4)
+                ]
+            )
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
+
+    async getallBlogs(page){
+        try {
+            return await this.database.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteBlogCollectionId,
+                [
+                    Query.equal('Status',[true]),
+                    Query.limit(6),
+                    Query.offset(4+(page - 1) * 6),
+                    Query.orderDesc('$updatedAt')
+                ]
+            )
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
+
+    async remainingBlogCount(){
+        try {
+            const res = await this.database.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteBlogCollectionId,
+                [
+                    Query.equal('Status',[true]),
+                    Query.limit(1)
+                ]
+            )
+
+            return Math.max(0,res?.total-4)
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
     
 
 
