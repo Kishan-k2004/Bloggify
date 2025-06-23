@@ -8,5 +8,7 @@ import AboutMe from "./AboutMe"
 import UpdateBlog from "./UpdateBlog"
 import Profile from "./Profile"
 import ViewBlog from "./ViewBlog"
+import PageNotFound from "./PageNotFound";
+import Loading from "./Loading";
 
-export {Navbar,Footer,Success,Failure,Blogs,CreateBlog,AboutMe,UpdateBlog,Profile,ViewBlog}
+export {Navbar,Footer,Success,Failure,Blogs,CreateBlog,AboutMe,UpdateBlog,Profile,ViewBlog,PageNotFound,Loading}

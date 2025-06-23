@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import profileService from '../appwrite/appwriteUserProfile';
 import { toast } from 'react-toastify';
 import UserInfoContext from '../context/UserInfoContext.js';
+import Loading from './Loading.jsx';
 
 function Profile() {
 
@@ -12,6 +13,7 @@ function Profile() {
   const data = useSelector((data)=> data.authentication.data)
   const [permission, setPermission] = useState(false)
   const [userInfo,setUserInfo] = useState(null)
+  const [isloading, setIsloading] = useState(true)
  
     
   useEffect(()=>{
@@ -25,12 +27,14 @@ function Profile() {
   useEffect(()=>{
     const fetchUserData = async()=>{
       try {
-        
+        setIsloading(true)
         const userData = await profileService.getUserData(user.userid)
         setUserInfo(userData)
         
       } catch (error) {
         toast.error('User Not Found')
+      }finally{
+        setIsloading(false)
       }
 
     }
@@ -38,7 +42,8 @@ function Profile() {
     fetchUserData()   
   },[user.username])
 
-  return (
+
+  return (isloading? <Loading/> :
     <UserInfoContext.Provider value={{userInfo,permission}}>
     <div className='flex flex-col gap-5'>
 

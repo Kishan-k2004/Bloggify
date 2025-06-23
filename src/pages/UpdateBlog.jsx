@@ -6,6 +6,7 @@ import { FormProvider, useForm, useFormContext } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
 import blogService from '../appwrite/appriteBlog.js'
+import Loading from './Loading.jsx'
 
 
 function UpdateBlog() {
@@ -17,6 +18,7 @@ function UpdateBlog() {
   const navigate = useNavigate()
   const [loading, setloading] = useState(false)
   const [defaultcontent, setDefaultContent] = useState('')
+  const [isloading, setIsloading] = useState(true)
   
 
   useEffect(()=>{
@@ -27,6 +29,7 @@ function UpdateBlog() {
     
     const validateUser = async()=>{
       try {
+        setIsloading(true)
         const docid = user.blogid
         const blog = await  blogService.getBlog(docid)
         if(userData?.$id === blog?.AutherId){
@@ -42,6 +45,8 @@ function UpdateBlog() {
         
       } catch (error) {
         console.log(error)
+      }finally{
+        setIsloading(false)
       }
     }
     
@@ -93,7 +98,7 @@ function UpdateBlog() {
 
   }
 
-  return (
+  return (isloading? <Loading/> :
     <FormProvider {...methods}>
     <form onSubmit={handleSubmit(onSubmit)}>
     <div className='flex flex-col items-center w-full gap-8'>

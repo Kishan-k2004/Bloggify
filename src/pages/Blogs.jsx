@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import blogService from '../appwrite/appriteBlog'
 import { useNavigate } from 'react-router'
+import Loading from './Loading'
 
 function Blogs() {
 
   const [blogList, setBlogList] = useState(null)
+  const [isloading, setIsloading] = useState(true)
   const navigate = useNavigate()
   const colorClass = [['text-red-600','bg-red-200'],['text-green-600','bg-green-200'],['text-blue-600','bg-blue-200'],['text-purple-600','bg-purple-200'],['text-pink-600','bg-pink-200']]
 
@@ -12,11 +14,14 @@ function Blogs() {
 
     const fetchallBlogs = async()=>{
       try {
+        setIsloading(true)
         const blogdata = await blogService.getRecentBlog()
         setBlogList(blogdata?.documents)
 
       } catch (error) {
         console.log(error)
+      }finally{
+        setIsloading(false)
       }
     }
 
@@ -24,7 +29,7 @@ function Blogs() {
   },[])
 
 
-  return (
+  return (isloading? <Loading/> :
     <div className='flex flex-col items-center pl-[2.5%] pr-[2.5%] gap-8'>
 
       <div className='mb-5'>

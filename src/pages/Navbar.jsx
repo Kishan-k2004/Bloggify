@@ -63,7 +63,7 @@ function Navbar() {
           </button>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white dark:bg-base-100 text-base-100 dark:text-white rounded-box w-52">
             {navItem.map((item)=>(
-              item.status && <li key={item.name}><Link to={item.slug || ''} onClick={item.event && item.event}>{item.name}</Link></li>
+              item.status && <li key={item.name}><Link  to={item.slug || ''} onClick={item.event && item.event}>{item.name}</Link></li>
             ))}
           </ul>
         </div>

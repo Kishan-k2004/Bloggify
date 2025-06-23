@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import './Blog.css'
 import profileService from '../appwrite/appwriteUserProfile'
 import { useSelector } from 'react-redux'
+import Loading from './Loading'
 
 function ViewBlog() {
 
@@ -15,11 +16,12 @@ function ViewBlog() {
     const clickOnLikedOrDisliked = useRef(false)
     const navigate = useNavigate()
     const userData = useSelector((data)=> data.authentication.data)
+    const [isloading, setIsloading] = useState(true)
 
     useEffect(()=>{
         const fetchBlogdata = async()=>{
             try {
-                
+                setIsloading(true)
                 const blogInfo = await blogService.getBlog(blogid)
                 if(blogInfo){
                     setBlog(blogInfo)
@@ -41,6 +43,8 @@ function ViewBlog() {
                 console.log(error)
                 toast.error('Blog not found.')
                 navigate('/')
+            }finally{
+                setIsloading(false)
             }
         }
 
@@ -123,7 +127,7 @@ function ViewBlog() {
     }
 
 
-  return (
+  return (isloading? <Loading/> :
     <div className='flex flex-col gap-5'>
 
         <div className='text-center'>
