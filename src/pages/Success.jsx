@@ -61,9 +61,9 @@ function Success() {
   )
 }
 
-
 function Countdown() {
   const [time, setTime] = useState(3); 
+  const navigate = useNavigate()
   
 
   useEffect(() => {
@@ -71,7 +71,7 @@ function Countdown() {
         setTime(prev => {
             if (prev <= 1) {
                 clearInterval(timer);
-                
+                navigate('/')
                 return 0;
 
             }
@@ -86,7 +86,7 @@ function Countdown() {
 
   return (
 
-      <span className='font-InterBold text-blue-500'>Redirecting you to your dashboard in {time} seconds.</span>
+    <span className='font-InterBold text-blue-500'>Redirecting you to your dashboard in {time} seconds.</span>
     
     );
 }

@@ -119,7 +119,7 @@ function ViewBlog() {
 
     async function handleCopy(){
         try {
-            await navigator.clipboard.writeText(`http://localhost:5173/blog/${blogid}/${blogtitle}`)
+            await navigator.clipboard.writeText(`https://bloggify-one.vercel.app/blog/${blogid}/${blogtitle}`)
         } catch (error) {
             console.log(error)
             toast.error("can't copy the Link.")
