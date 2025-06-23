@@ -30,7 +30,7 @@ export class AuthService{
 
     // OAuth2 session creation
     async createOAuth2(){
-        this.account.createOAuth2Session(OAuthProvider.Google,'https://bloggify-avn9vrwxv-kishan-khansalis-projects.vercel.app/authentication-successful','https://bloggify-avn9vrwxv-kishan-khansalis-projects.vercel.app/authentication-failed')
+        this.account.createOAuth2Session(OAuthProvider.Google,'https://bloggify-one.vercel.app/authentication-successful','https://bloggify-one.vercel.app/authentication-failed')
         
     }
 
