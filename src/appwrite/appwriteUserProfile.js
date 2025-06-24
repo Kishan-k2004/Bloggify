@@ -45,7 +45,7 @@ export class ProfileService{
                 conf.appwriteUserProfileCollectionId,
                 [ Query.equal("email",[email])]
             )
-            return User.documents.length > 0 ? User.documents[0] : null;
+            return User.documents.length > 0 ? User.documents[0] : false;
         } catch (error) {
             throw error
         }

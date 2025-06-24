@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router'
-import {Blogs, Failure, Success, Profile, CreateBlog, UpdateBlog,ViewBlog, AboutMe,PageNotFound} from './pages/index.js'
+import {Blogs, Failure, Success, Profile, CreateBlog, UpdateBlog,ViewBlog, AboutMe,PageNotFound,Resetpassword} from './pages/index.js'
 import Source from './Source.jsx'
 
 
@@ -20,6 +20,7 @@ function Router() {
       </Route>,
       
       <Route path='*' element={<PageNotFound/>} />
+      <Route path='/reset-password' element={<Resetpassword/>} />
       <Route path='/authentication-failed' element={<Failure/>} />
       <Route path='/authentication-successful' element={<Success/>} />
 

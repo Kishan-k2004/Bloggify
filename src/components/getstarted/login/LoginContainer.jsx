@@ -14,7 +14,7 @@ function LoginContainer({setview}) {
 
   const [loading, setLoading] = useState(false)
   const CloseModel = useContext(ModelContext)
-  const {register,handleSubmit,formState: { errors },formState} = useForm()
+  const {register,handleSubmit,watch,formState: { errors },formState} = useForm()
 
   const dispatch = useDispatch()
 
@@ -47,6 +47,30 @@ function LoginContainer({setview}) {
     }
     finally{
       setLoading(false)
+    }
+  }
+
+  async function handleForgetPassword(){
+    const email = watch('email')
+    if(!email){
+      toast.error('Email is required')
+      return
+    }
+
+    try {
+      const validate = await profileService.haveUser(email)
+      if(!validate){
+        toast.error('This email is not registered.')
+        return
+      }
+      
+      await toast.promise(authService.forgetRequest(email),{
+        pending : 'Sending mail',
+        success : 'Email sended.',
+        error : "Can't send email."
+      })
+    } catch (error) {
+      
     }
   }
 
@@ -97,7 +121,7 @@ function LoginContainer({setview}) {
         {errors.password && <ErrorMessage msg={errors.password.message}/>}
         </div>
 
-        <p className='text-right text-blue-500 cursor-pointer'>Forget Password</p>
+        <p className='text-right text-blue-500 cursor-pointer' onClick={handleForgetPassword}>Forget Password</p>
       
         <div>
           <Button 

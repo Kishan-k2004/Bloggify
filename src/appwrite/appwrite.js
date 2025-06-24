@@ -29,7 +29,7 @@ export class AuthService{
     }
     // https://bloggify-one.vercel.app
     //http://localhost:5173
-    
+
     // OAuth2 session creation
     async createOAuth2(){
         this.account.createOAuth2Session(OAuthProvider.Google,'https://bloggify-one.vercel.app/authentication-successful','https://bloggify-one.vercel.app/authentication-failed')
@@ -61,6 +61,25 @@ export class AuthService{
     async userLogout(){
         try {
             return await this.account.deleteSessions()
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async forgetRequest(email){
+        try {
+            const tocken = await this.account.createRecovery(email,'http://localhost:5173/reset-password')
+
+            return tocken? true : false
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async resetPassword(userid,secret,password){
+        try {
+            const res = await this.account.updateRecovery(userid,secret,password)
+            return res? true: false
         } catch (error) {
             throw error
         }
