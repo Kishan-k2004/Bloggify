@@ -68,7 +68,7 @@ export class AuthService{
 
     async forgetRequest(email){
         try {
-            const tocken = await this.account.createRecovery(email,'http://localhost:5173/reset-password')
+            const tocken = await this.account.createRecovery(email,'https://bloggify-one.vercel.app/reset-password')
 
             return tocken? true : false
         } catch (error) {
