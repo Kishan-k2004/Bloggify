@@ -4,7 +4,7 @@
 
 ## 🌐 Live Demo
 
-> [https://bloggify-one.vercel.app](#)  
+> [BLOGGIFY](https://bloggify-one.vercel.app)  
 
 ---
 
