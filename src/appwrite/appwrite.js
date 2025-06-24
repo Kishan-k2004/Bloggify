@@ -27,7 +27,9 @@ export class AuthService{
             throw error
         }
     }
-
+    // https://bloggify-one.vercel.app
+    //http://localhost:5173
+    
     // OAuth2 session creation
     async createOAuth2(){
         this.account.createOAuth2Session(OAuthProvider.Google,'https://bloggify-one.vercel.app/authentication-successful','https://bloggify-one.vercel.app/authentication-failed')

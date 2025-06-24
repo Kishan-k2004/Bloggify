@@ -43,7 +43,7 @@ function Blogs() {
       </div>
 
       {/* For small screen */}
-      <div className='w-full gap-5 flex-col flex sm:hidden mb-5 pl-5 pr-10'>
+      <div className='w-full gap-5  flex-col flex sm:hidden mb-5 pl-5 pr-10'>
 
         <div className='flex flex-col h-[370px] gap-3'>
 
@@ -458,7 +458,7 @@ function Blogs() {
       </div>
 
       {/* For large screen */}
-      <div className='flex-col w-full gap-5 hidden lg:flex mb-2 pl-5 pr-5'>
+      <div className=' w-full gap-5 hidden flex-col lg:flex mb-2 pl-5 pr-5'>
 
         <div className='grid grid-cols-2 gap-5 w-full h-[600px] '>
 
@@ -510,11 +510,11 @@ function Blogs() {
 
           </div>
 
-          <div className='grid grid-rows-2  gap-5'>
+          <div className='grid grid-rows-2 h-[600px] gap-5'>
 
             <div className='flex flex-row w-full gap-5 cursor-pointer' onClick={()=> navigate(`/blog/${blogList?.[1]?.$id}/${blogList?.[1]?.Title}`)}>
 
-              <div className='w-4/7 bg-gray-500'
+              <div className='w-4/7 bg-gray-500 '
                 style={
                   blogList?.[1]?.Image ?{
                     backgroundImage: `url(${blogList[1].Image})`,

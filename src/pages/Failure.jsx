@@ -11,11 +11,11 @@ function Failure() {
         </div>
 
         <div>
-            <p className='font-Inter-Regular mt-3'>Google authentication failed. Please try again or choose a different login option.</p>
+            <p className='font-Inter-Regular mt-3 text-red-500'>Google authentication failed. Please try again or choose a different login option.</p>
         </div>
 
         <div>
-            <Link className='mt-3 text-blue-500 font-InterBold' to={'/'}>Go Back</Link>
+            <Link className='mt-3 text-black dark:text-white font-InterBold' to={'/'}>Go Back</Link>
         </div>
     </div>
   )

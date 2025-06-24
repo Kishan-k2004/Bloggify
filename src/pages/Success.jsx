@@ -10,7 +10,6 @@ import profileService from '../appwrite/appwriteUserProfile.js'
 function Success() {
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     useEffect(()=>{
 
@@ -31,9 +30,6 @@ function Success() {
 
                     dispatch(UpdateProfile(data.profileImg))
                     
-                    setTimeout(() => {
-                        navigate('/')
-                    }, 2000);
                 }
                 
             }
@@ -55,7 +51,7 @@ function Success() {
         </div>
 
         <div>
-            <p className='font-Inter-Regular mt-3 pl-20 pr-20'>Google authentication successful. {<Countdown/>} </p>
+            <p className='font-Inter-Regular mt-3 pl-20 pr-20 text-black dark:text-white'>Google authentication successful. {<Countdown/>} </p>
         </div>
     </div>
   )
