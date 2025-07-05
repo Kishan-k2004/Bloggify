@@ -216,8 +216,7 @@ function SimilarBlog({keywords}){
                 const blogList = await blogService.getSimilarBlog(keywords)
                 
                 const newBlogList =  blogList?.documents?.filter((blog)=> blog.$id !== blogid)?.filter((blog)=> blog.Status === true) || []
-                console.log(newBlogList)
-                
+                setSimilarBlogs(newBlogList)
 
             } catch (error) {
                 console.log(error)
