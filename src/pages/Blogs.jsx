@@ -45,7 +45,7 @@ function Blogs() {
       {/* For small screen */}
       <div className='w-full gap-5  flex-col flex sm:hidden mb-5 pl-5 pr-10'>
 
-        <div className='flex flex-col h-[370px] gap-3'>
+        <div className='flex flex-col h-[370px] gap-3' onClick={()=> navigate(`/blog/${blogList?.[0]?.$id}/${blogList?.[0]?.Title}`)}>
 
           <div className='bg-gray-500 h-1/2'
             style={
@@ -68,7 +68,7 @@ function Blogs() {
             <h1 className='font-InterBold text-2xl'>{blogList?.[0]?.Title}</h1>
 
             <div className='ml-auto mr-5'>
-              <a href={`/blog/${blogList?.[0]?.$id}/${blogList?.[0]?.Title}`}><svg
+              <a><svg
               xmlns="http://www.w3.org/2000/svg" 
               className='h-6 w-6 fill-current hover:text-gray-500' 
               viewBox="0 -960 960 960" 
@@ -95,7 +95,7 @@ function Blogs() {
 
         </div>
 
-        <div className='flex flex-col h-[350px] gap-3'>
+        <div className='flex flex-col h-[350px] gap-3' onClick={()=> navigate(`/blog/${blogList?.[1]?.$id}/${blogList?.[1]?.Title}`)}>
 
           <div className='bg-gray-500 h-1/2'
             style={
@@ -145,7 +145,7 @@ function Blogs() {
 
         </div>
 
-        <div className='flex flex-col h-[350px] gap-3'>
+        <div className='flex flex-col h-[350px] gap-3' onClick={()=> navigate(`/blog/${blogList?.[2]?.$id}/${blogList?.[2]?.Title}`)}>
 
           <div className='bg-gray-500 h-1/2'
             style={
@@ -195,7 +195,7 @@ function Blogs() {
 
         </div>
 
-        <div className='flex flex-col h-[350px] gap-3'>
+        <div className='flex flex-col h-[350px] gap-3' onClick={()=> navigate(`/blog/${blogList?.[3]?.$id}/${blogList?.[3]?.Title}`)}>
 
           <div className='bg-gray-500 h-1/2'
             style={
@@ -251,7 +251,7 @@ function Blogs() {
       {/* For medium screen */}
       <div className=' w-full h-[1200px] flex-col gap-8 hidden sm:flex lg:hidden mb-10 pl-5 pr-5'>
 
-        <div className='flex flex-col h-4/12 gap-3'>
+        <div className='flex flex-col h-4/12 gap-3' onClick={()=> navigate(`/blog/${blogList?.[0]?.$id}/${blogList?.[0]?.Title}`)}>
 
           <div className='bg-gray-500 h-1/2'
             style={
@@ -274,7 +274,7 @@ function Blogs() {
             <h1 className='font-InterBold text-2xl'>{blogList?.[0]?.Title}</h1>
 
             <div className='ml-auto mr-5'>
-              <a href={`/blog/${blogList?.[0]?.$id}/${blogList?.[0]?.Title}`}><svg
+              <a><svg
               xmlns="http://www.w3.org/2000/svg" 
               className='h-6 w-6 fill-current hover:text-gray-500' 
               viewBox="0 -960 960 960" 
@@ -301,7 +301,7 @@ function Blogs() {
 
         </div>
 
-        <div className='flex flex-row gap-5 h-2/12'>
+        <div className='flex flex-row gap-5 h-2/12' onClick={()=> navigate(`/blog/${blogList?.[1]?.$id}/${blogList?.[1]?.Title}`)}>
             
           <div className='w-1/2 bg-gray-500 '
           style={
@@ -326,7 +326,7 @@ function Blogs() {
             <h1 className='font-InterBold text-2xl'>{blogList?.[1]?.Title}</h1>
 
             <div className='ml-auto mr-5'>
-              <a href={`/blog/${blogList?.[1]?.$id}/${blogList?.[1]?.Title}`}><svg
+              <a><svg
               xmlns="http://www.w3.org/2000/svg" 
               className='h-6 w-6 fill-current hover:text-gray-500' 
               viewBox="0 -960 960 960" 
@@ -353,7 +353,7 @@ function Blogs() {
         </div>
         </div>
 
-        <div className='flex flex-row gap-5 h-2/12'>
+        <div className='flex flex-row gap-5 h-2/12' onClick={()=> navigate(`/blog/${blogList?.[2]?.$id}/${blogList?.[2]?.Title}`)}>
             
           <div className='w-1/2 bg-gray-500 '
           style={
@@ -378,7 +378,7 @@ function Blogs() {
             <h1 className='font-InterBold text-2xl'>{blogList?.[2]?.Title}</h1>
 
             <div className='ml-auto mr-5'>
-              <a href={`/blog/${blogList?.[2]?.$id}/${blogList?.[2]?.Title}`}><svg
+              <a><svg
               xmlns="http://www.w3.org/2000/svg" 
               className='h-6 w-6 fill-current hover:text-gray-500' 
               viewBox="0 -960 960 960" 
@@ -405,7 +405,7 @@ function Blogs() {
         </div>
         </div>
 
-        <div className='flex flex-col h-4/12 gap-3'>
+        <div className='flex flex-col h-4/12 gap-3' onClick={()=> navigate(`/blog/${blogList?.[3]?.$id}/${blogList?.[3]?.Title}`)}>
 
           <div className='bg-gray-500 h-1/2'
             style={
@@ -428,7 +428,7 @@ function Blogs() {
             <h1 className='font-InterBold text-2xl'>{blogList?.[3]?.Title}</h1>
 
             <div className='ml-auto mr-5'>
-              <a href={`/blog/${blogList?.[3]?.$id}/${blogList?.[3]?.Title}`}><svg
+              <a><svg
               xmlns="http://www.w3.org/2000/svg" 
               className='h-6 w-6 fill-current hover:text-gray-500' 
               viewBox="0 -960 960 960" 

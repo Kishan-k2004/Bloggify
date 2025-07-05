@@ -190,7 +190,7 @@ function ViewBlog() {
       <hr className='text-gray-500 w-full' />
 
       <div className='flex flex-col items-center'>
-        <SimilarBlog keywords={blog?.keywords}/>
+        <SimilarBlog keywords={blog?.keywords || [] }/>
       </div>
 
     </div>
@@ -200,20 +200,24 @@ function ViewBlog() {
 export default ViewBlog
 
 
-function SimilarBlog({keywords=[]}){
+function SimilarBlog({keywords}){
 
     const [similarBlogs, setSimilarBlogs] = useState([])
     const {blogid} = useParams()
     const navigate = useNavigate()
 
     useEffect(()=>{
+        
         const fetchSimilarBlog = async()=>{
             if(keywords.length === 0) return
 
             try {
+        
                 const blogList = await blogService.getSimilarBlog(keywords)
+                
                 const newBlogList =  blogList?.documents?.filter((blog)=> blog.$id !== blogid)?.filter((blog)=> blog.Status === true) || []
-                setSimilarBlogs(newBlogList)
+                console.log(newBlogList)
+                
 
             } catch (error) {
                 console.log(error)
@@ -232,10 +236,13 @@ function SimilarBlog({keywords=[]}){
         <div className='flex flex-row w-[80%] gap-4 md:gap-8 overflow-x-auto mb-15 p-4'>
 
             {similarBlogs?.length == 0? 
-
+            <div>
+                <p className='font-Inter-Regular text-center text-black dark:text-white'>No similar blog available.</p>
+            </div>
+            :
             similarBlogs?.map((blog)=>(
 
-                <div className="card bg-white dark:bg-base-100 text-black dark:text-white font-Inter-Regular min-w-80 shadow-sm " key={blog.$id}>
+                <div className="card cursor-pointer bg-white dark:bg-base-100 text-black dark:text-white font-Inter-Regular min-w-70 max-w-70 shadow-sm " key={blog.$id} onClick={()=> navigate(`/blog/${blog.$id}/${blog.Title}`)}>
                     <figure>
                         {blog.Image? (
                         <img
@@ -249,7 +256,7 @@ function SimilarBlog({keywords=[]}){
                         ></div>)}
                     </figure>
                     <div className="card-body">
-                        <h2 className="card-title truncate cursor-pointer" onClick={()=> navigate(`/blog/${blog.$id}/${blog.Title}`)}>
+                        <h2 className="card-title truncate ">
                         {blog.Title}
                         </h2>
 
@@ -258,11 +265,7 @@ function SimilarBlog({keywords=[]}){
                     </div>
                 </div>
                 
-            ))
-            :
-            <div>
-                <p className='font-Inter-Regular text-center text-black dark:text-white'>No similar blog available.</p>
-            </div>}
+            ))}
 
         </div>
         </>
