@@ -63,7 +63,7 @@ function App() {
       stacked
       position='top-left'
       autoClose={3000}
-      hideProgressBar={true}
+      hideProgressBar={false}
       newestOnTop={false}
       closeOnClick
       style={{ zIndex: 9999 }}
